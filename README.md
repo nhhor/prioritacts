@@ -1,4 +1,70 @@
-# Contized
+# Application: **Prioritacts**: Contacts ... Prioritized
+
+#### By Noah Horwitz
+
+<!-- ###### _First published 2020-02-14_ -->
+<!-- The fully deployed project is hosted on GH-Pages [HERE](https://nhhor.github.io/prioritacts). -->
+
+## Description:
+This project was made as part of a capstone coding project for Noah Horwitz, a student at _[Epicodus](http://www.epicodus.com)_, a vocational school for technology careers based in Portland, OR. The project is designed to take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list..
+
+> #### Project Proposal
+> * **Name of Student:** Noah Horwitz
+> * **Name of Project:** "prioritacts: Contacts ... Prioritized"
+> * **Project's Purpose or Goal: (What will it do for users?)** Take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list.
+> * **List the absolute minimum features the project requires to meet this purpose or goal:**
+>   * Google OAuth to read & update a user's contacts.
+>   * JavaScript/React logic to sort and display with a great UI.
+> * **What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.**
+>   * JavaScript (backend logic)
+>   * React (front end dom)
+>   * Redux
+>     * (potentially would need custom API if unable to push updates to Google Contacts API)
+>   * Google OAuth w/ RU functionality into a custom contact field.
+>   * Refactor as React Native app.
+>   * Track other means of communication outside of google's 'interactions,' such as What's App interactions, etc.
+> * **What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?**
+>   * React Native
+>   * Android Studio
+
+
+## Setup/Installation instructions:
+* Click the `Clone or download` button and copy the link provided.
+* Open your terminal application (assuming GIT Scripts AND node.js (with NPM) have been installed on your system) and type `git clone (link)`.
+* In the terminal using the `cd`... command, navigate to the newly created repository and run `npm install`.
+* Then in the terminal, run `npm run start`.
+* The app should then automatically open in a browser window.
+
+## Technologies Used:
+> `React`
+> `Redux`
+> `WebPack`
+> `JavaScript`
+> `CSS`
+> `HTML`
+
+## Known Bugs:
+
+## React Component Tree:
+![React Component Tree](https://raw.githubusercontent.com/nhhor/prioritacts/master/public/prioritacts-component-tree.png "Prioritacts React Component Tree")
+
+## References:
+* Component & Route Structure designed at [Draw.io](https://www.draw.io/).
+
+## Support and contact details
+<!-- Contact [example@sample.com](mailto:example@sample.com) -->
+
+## License
+_This This repository is copyright (C) 2019 by Noah Horwitz and licensed under the GNU General Public License v3.0 [gpl-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)_.
+
+
+
+
+
+
+
+
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
