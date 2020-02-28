@@ -27,6 +27,22 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 >   * React Native
 >   * Android Studio
 
+## Project Log
+|Start|End|Log|Notes|
+|---:|:---|:---:|:---:|
+|2020-02-28|`---`|`---`|`---`|
+|08:00|09:00| * Initialize project with create-react-app.<BR> * Update Readme|Attempted to use create-react-native-app but caused system error: will research solution.|
+|09:00|09:30| * Create component tree mock-up. (**Break the UI into a Component Hierarchy**)|[Draw.io](https://www.draw.io/)|
+|09:30|10:15| * Research Google OAuth.|* [YouTube: "1. How To Authenticate Google Api Using Oauth2"](https://www.youtube.com/watch?v=yfxjGagtVeE) (-)<BR>* [YouTube: "OAuth 2.0: An Overview"](https://www.youtube.com/watch?v=CPbvxxslDTU) (+)<BR>* [YouTube Generate Google API Key and OAth Client ID](https://www.youtube.com/watch?v=l5nxzSVlxKc) (-)|
+|10:15|10:30| * Create project e-mail account and fill with test contacts.|[prioritacts@gmail.com](prioritacts@gmail.com)|
+|10:30|11:30| * Begin to **Build a Static Version**||
+
+
+
+
+Break the UI into a Component Hierarchy
+
+
 
 ## Setup/Installation instructions:
 * Click the `Clone or download` button and copy the link provided.
@@ -57,14 +73,7 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 ## License
 _This This repository is copyright (C) 2019 by Noah Horwitz and licensed under the GNU General Public License v3.0 [gpl-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)_.
 
-
-
-
-
-
-
-
-
+---
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
