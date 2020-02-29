@@ -39,9 +39,7 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 |14:00|15:00|* Continue to **Build a Static Version**||
 |15:00|15:45|* Research Google OAuth.|* [YouTube: API Authentication with Node Part #11 - Google OAuth](https://www.youtube.com/watch?v=JgSLf-HS5gg) (+)|
 |15:45|16:15|* Attempt to test Google OAuth.|* [Google People API documentation](https://developers.google.com/people) (-)<BR> * Negligible success with google People API docs / their in-house API tester.|
-
-
-
+|16:15|17:00|* Fine-tune css for static display.||
 
 ## Setup/Installation instructions:
 * Click the `Clone or download` button and copy the link provided.
