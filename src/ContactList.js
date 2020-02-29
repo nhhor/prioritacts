@@ -22,8 +22,8 @@ function ContactList(props){
 
       <style>{`
           .inContactList {
-            background: rgb(179,179,179);
-            background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.33) 1%, rgba(179,179,179,0.33) 99%, rgba(179,179,179,0.03) 100%);
+            // background: rgba(179,179,179,.03);
+            // background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.10) 1%, rgba(179,179,179,0.10) 99%, rgba(179,179,179,0.03) 100%);
           }
           .inContactList h1 {
             margin: 0px;
