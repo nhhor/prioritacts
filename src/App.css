@@ -1,3 +1,7 @@
+html {
+  background: rgba(179,179,179,.1);
+}
+
 .App {
   text-align: center;
   overflow: hidden;

@@ -31,16 +31,15 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 |Start|End|Log|Notes|
 |---:|:---|:---:|:---:|
 |2020-02-28|`---`|`---`|`---`|
-|08:00|09:00| * Initialize project with create-react-app.<BR> * Update Readme|Attempted to use create-react-native-app but caused system error: will research solution.|
-|09:00|09:30| * Create component tree mock-up. (**Break the UI into a Component Hierarchy**)|[Draw.io](https://www.draw.io/)|
-|09:30|10:15| * Research Google OAuth.|* [YouTube: "1. How To Authenticate Google Api Using Oauth2"](https://www.youtube.com/watch?v=yfxjGagtVeE) (-)<BR>* [YouTube: "OAuth 2.0: An Overview"](https://www.youtube.com/watch?v=CPbvxxslDTU) (+)<BR>* [YouTube Generate Google API Key and OAth Client ID](https://www.youtube.com/watch?v=l5nxzSVlxKc) (-)|
-|10:15|10:30| * Create project e-mail account and fill with test contacts.|[prioritacts@gmail.com](prioritacts@gmail.com)|
-|10:30|11:30| * Begin to **Build a Static Version**||
+|08:00|09:00|* Initialize project with create-react-app.<BR>* Update Readme|Attempted to use create-react-native-app but caused system error: will research solution.|
+|09:00|09:30|* Create component tree mock-up. (**Break the UI into a Component Hierarchy**)|[Draw.io](https://www.draw.io/)|
+|09:30|10:15|* Research Google OAuth.|* [YouTube: "1. How To Authenticate Google Api Using Oauth2"](https://www.youtube.com/watch?v=yfxjGagtVeE) (-)<BR>* [YouTube: "OAuth 2.0: An Overview"](https://www.youtube.com/watch?v=CPbvxxslDTU) (+)<BR>* [YouTube Generate Google API Key and OAth Client ID](https://www.youtube.com/watch?v=l5nxzSVlxKc) (-)|
+|10:15|10:30|* Create project e-mail account and fill with test contacts.|[prioritacts@gmail.com](prioritacts@gmail.com)|
+|10:30|13:00|* Begin to **Build a Static Version**||
+|14:00|15:00|* Continue to **Build a Static Version**||
+|15:00|15:45|* Research Google OAuth.|* [YouTube: API Authentication with Node Part #11 - Google OAuth](https://www.youtube.com/watch?v=JgSLf-HS5gg) (+)|
+|15:45|16:15|* Attempt to test Google OAuth.|* [Google People API documentation](https://developers.google.com/people) (-)<BR> * Negligible success with google People API docs / their in-house API tester.|
 
-
-
-
-Break the UI into a Component Hierarchy
 
 
 
