@@ -6,72 +6,81 @@
 <!-- The fully deployed project is hosted on GH-Pages [HERE](https://nhhor.github.io/prioritacts). -->
 
 ## Description:
+
 This project was made as part of a capstone coding project for Noah Horwitz, a student at _[Epicodus](http://www.epicodus.com)_, a vocational school for technology careers based in Portland, OR. The project is designed to take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list..
 
 > #### Project Proposal
-> * **Name of Student:** Noah Horwitz
-> * **Name of Project:** "prioritacts: Contacts ... Prioritized"
-> * **Project's Purpose or Goal: (What will it do for users?)** Take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list.
-> * **List the absolute minimum features the project requires to meet this purpose or goal:**
->   * Google OAuth to read & update a user's contacts.
->   * JavaScript/React logic to sort and display with a great UI.
-> * **What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.**
->   * JavaScript (backend logic)
->   * React (front end dom)
->   * Redux
->     * (potentially would need custom API if unable to push updates to Google Contacts API)
->   * Google OAuth w/ RU functionality into a custom contact field.
->   * Refactor as React Native app.
->   * Track other means of communication outside of google's 'interactions,' such as What's App interactions, etc.
-> * **What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?**
->   * React Native
->   * Android Studio
+>
+> - **Name of Student:** Noah Horwitz
+> - **Name of Project:** "prioritacts: Contacts ... Prioritized"
+> - **Project's Purpose or Goal: (What will it do for users?)** Take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list.
+> - **List the absolute minimum features the project requires to meet this purpose or goal:**
+>   - Google OAuth to read & update a user's contacts.
+>   - JavaScript/React logic to sort and display with a great UI.
+> - **What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.**
+>   - JavaScript (backend logic)
+>   - React (front end dom)
+>   - Redux
+>     - (potentially would need custom API if unable to push updates to Google Contacts API)
+>   - Google OAuth w/ RU functionality into a custom contact field.
+>   - Refactor as React Native app.
+>   - Track other means of communication outside of google's 'interactions,' such as What's App interactions, etc.
+> - **What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?**
+>   - React Native
+>   - Android Studio
 
 ## Project Log
-|Start|End|Log|Notes|
-|---:|:---|:---:|:---:|
-|2020-02-28|`---`|`---`|`---`|
-|08:00|09:00|* Initialize project with create-react-app.<BR>* Update Readme|Attempted to use create-react-native-app but caused system error: will research solution.|
-|09:00|09:30|* Create component tree mock-up. (**Break the UI into a Component Hierarchy**)|[Draw.io](https://www.draw.io/)|
-|09:30|10:15|* Research Google OAuth.|* [YouTube: "1. How To Authenticate Google Api Using Oauth2"](https://www.youtube.com/watch?v=yfxjGagtVeE) (-)<BR>* [YouTube: "OAuth 2.0: An Overview"](https://www.youtube.com/watch?v=CPbvxxslDTU) (+)<BR>* [YouTube Generate Google API Key and OAth Client ID](https://www.youtube.com/watch?v=l5nxzSVlxKc) (-)|
-|10:15|10:30|* Create project e-mail account and fill with test contacts.|[prioritacts@gmail.com](prioritacts@gmail.com)|
-|10:30|13:00|* Begin to **Build a Static Version**||
-|14:00|15:00|* Continue to **Build a Static Version**||
-|15:00|15:45|* Research Google OAuth.|* [YouTube: API Authentication with Node Part #11 - Google OAuth](https://www.youtube.com/watch?v=JgSLf-HS5gg) (+)|
-|15:45|16:15|* Attempt to test Google OAuth.|* [Google People API documentation](https://developers.google.com/people) (-)<BR> * Negligible success with google People API docs / their in-house API tester.|
-|16:15|17:00|* Fine-tune css for static display.||
+
+|      Start | End   |                                       Log                                       |                                                                                                                                                        Notes                                                                                                                                                         |
+| ---------: | :---- | :-----------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 2020-02-28 | `---` |                                      `---`                                      |                                                                                                                                                        `---`                                                                                                                                                         |
+|      08:00 | 09:00 |         _ Initialize project with create-react-app.<BR>_ Update Readme          |                                                                                                              Attempted to use create-react-native-app but caused system error: will research solution.                                                                                                               |
+|      09:00 | 09:30 | \* Create component tree mock-up. (**Break the UI into a Component Hierarchy**) |                                                                                                                                           [Draw.io](https://www.draw.io/)                                                                                                                                            |
+|      09:30 | 10:15 |                            \* Research Google OAuth.                            | _ [YouTube: "1. How To Authenticate Google Api Using Oauth2"](https://www.youtube.com/watch?v=yfxjGagtVeE) (-)<BR>_ [YouTube: "OAuth 2.0: An Overview"](https://www.youtube.com/watch?v=CPbvxxslDTU) (+)<BR>\* [YouTube Generate Google API Key and OAth Client ID](https://www.youtube.com/watch?v=l5nxzSVlxKc) (-) |
+|      10:15 | 10:30 |          \* Create project e-mail account and fill with test contacts.          |                                                                                                                                    [prioritacts@gmail.com](prioritacts@gmail.com)                                                                                                                                    |
+|      10:30 | 13:00 |                     \* Begin to **Build a Static Version**                      |                                                                                                                                                                                                                                                                                                                      |
+|      14:00 | 15:00 |                    \* Continue to **Build a Static Version**                    |                                                                                                                                                                                                                                                                                                                      |
+|      15:00 | 15:45 |                            \* Research Google OAuth.                            |                                                                                                 \* [YouTube: API Authentication with Node Part #11 - Google OAuth](https://www.youtube.com/watch?v=JgSLf-HS5gg) (+)                                                                                                  |
+|      15:45 | 16:15 |                        \* Attempt to test Google OAuth.                         |                                                                           _ [Google People API documentation](https://developers.google.com/people) (-)<BR> _ Negligible success with google People API docs / their in-house API tester.                                                                            |
+|      16:15 | 17:00 |                      \* Fine-tune css for static display.                       |                                                                                                                                                                                                                                                                                                                      |
 
 ## Setup/Installation instructions:
-* Click the `Clone or download` button and copy the link provided.
-* Open your terminal application (assuming GIT Scripts AND node.js (with NPM) have been installed on your system) and type `git clone (link)`.
-* In the terminal using the `cd`... command, navigate to the newly created repository and run `npm install`.
-* Then in the terminal, run `npm run start`.
-* The app should then automatically open in a browser window.
+
+- Click the `Clone or download` button and copy the link provided.
+- Open your terminal application (assuming GIT Scripts AND node.js (with NPM) have been installed on your system) and type `git clone (link)`.
+- In the terminal using the `cd`... command, navigate to the newly created repository and run `npm install`.
+- Then in the terminal, run `npm run start`.
+- The app should then automatically open in a browser window.
 
 ## Technologies Used:
-> `React`
-> `Redux`
-> `WebPack`
-> `JavaScript`
-> `CSS`
-> `HTML`
+
+> `React` > `Redux` > `WebPack` > `JavaScript` > `CSS` > `HTML`
 
 ## Known Bugs:
 
 ## React Component Tree:
+
 ![React Component Tree](https://raw.githubusercontent.com/nhhor/prioritacts/master/public/prioritacts-component-tree.png "Prioritacts React Component Tree")
 
 ## References:
-* Component & Route Structure designed at [Draw.io](https://www.draw.io/).
+
+- Component & Route Structure designed at [Draw.io](https://www.draw.io/).
 
 ## Support and contact details
+
 <!-- Contact [example@sample.com](mailto:example@sample.com) -->
 
 ## License
+
 _This This repository is copyright (C) 2019 by Noah Horwitz and licensed under the GNU General Public License v3.0 [gpl-3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)_.
 
----
+# NOTES:
 
+[A Brief Overview of ES6 for React Native Developers](https://medium.com/the-react-native-log/a-brief-overview-of-es6-for-react-native-developers-15e7c68315da)
+[React Native Basics: Build a Currency Converter](https://learn.handlebarlabs.com/courses/enrolled/175915)
+[React Advanced Topics Data Persistence and Choose Your Own Adventure](https://www.learnhowtoprogram.com/react/advanced-topics/data-persistence-and-choose-your-own-adventure)
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
