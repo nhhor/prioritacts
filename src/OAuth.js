@@ -1,9 +1,9 @@
 /* global gapi */
 import React, { Component } from "react";
 
-const CLIENT_ID = "xxx";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
-const API_KEY = "xxx";
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const DISCOVERY_DOCS =
   "https://people.googleapis.com/$discovery/rest?version=v1";
@@ -23,7 +23,6 @@ class OAuth extends Component {
 
   componentDidMount() {
     const successCallback = this.onSuccess.bind(this);
-
     window.gapi.load("auth2", () => {
       this.auth2 = gapi.auth2.init({
         apiKey: `${API_KEY}`,
@@ -36,7 +35,6 @@ class OAuth extends Component {
 
       this.auth2.then(() => {
         console.log("on init");
-
         this.setState({
           isSignedIn: this.auth2.isSignedIn.get()
         });
