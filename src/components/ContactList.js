@@ -9,7 +9,12 @@ function ContactList(props) {
       console.log("Awaiting OAuth or contacts to load...")
       return <h1>Hello!</h1>
     } else {
-      return props.contactList.map((contact) => <Contact name={contact.names[0].displayName} id={contact.resourceName} key={contact.resourceName}/>)
+      return props.contactList.map((contact, index) => <Contact
+      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
+      birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
+      index={index}
+      id={contact.resourceName}
+      key={contact.resourceName}/>)
     }
   };
 
@@ -32,3 +37,9 @@ function ContactList(props) {
 }
 
 export default ContactList;
+
+// birthday={contact.birthdays[0].date}
+// email={contact.emailAddresses[0].value}
+// events={contact.events[0]}
+// phone={contact.phoneNumbers[0].value}
+// photo={contact.photos[0].url}
