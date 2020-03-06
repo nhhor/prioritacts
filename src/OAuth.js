@@ -1,12 +1,13 @@
 /* global gapi */
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const DISCOVERY_DOCS =
-  "https://people.googleapis.com/$discovery/rest?version=v1";
+"https://people.googleapis.com/$discovery/rest?version=v1";
 
 const SCOPE = "https://www.googleapis.com/auth/contacts";
 
@@ -17,7 +18,9 @@ class OAuth extends Component {
     this.state = {
       isSignedIn: false,
       googleUser: "",
-      2: []
+      contacts: null,
+      err: null,
+      access_token: null,
     };
   }
 
@@ -34,7 +37,7 @@ class OAuth extends Component {
       // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))
 
       this.auth2.then(() => {
-        console.log("on init");
+        console.log("TRIGGER on init");
         this.setState({
           isSignedIn: this.auth2.isSignedIn.get()
         });
@@ -55,39 +58,25 @@ class OAuth extends Component {
   }
 
   onSuccess() {
-    console.log("on success");
-    console.log("this.auth2: ", this.auth2);
+    console.log(`TRIGGER on success.    🎩${this.auth2.currentUser.get().Qt.Ad}👠    now signed in.`);
     this.setState({
       isSignedIn: true,
-      err: null
+      err: null,
+      googleUser: this.auth2.currentUser.get().Qt.Ad,
+      access_token: this.auth2.currentUser.get().uc.access_token,
     });
-    var googleUser = this.auth2.currentUser.get().Qt.Ad;
-    this.setState({
-      googleUser: this.auth2.currentUser.get().Qt.Ad
-    });
-    console.log("users info: ", googleUser);
-
-    var access_token = this.auth2.currentUser.get().uc.access_token;
-    console.log("access_token: ", access_token);
 
     const request = async () => {
-      console.log(`Bearer ${this.auth2.currentUser.get().uc.access_token}`);
-
       const response = await fetch(
-        `https://people.googleapis.com/v1/people/me/connections?access_token=${
-          this.auth2.currentUser.get().uc.access_token
-        }&personFields=names`
+        `https://people.googleapis.com/v1/people/me/connections?access_token=${this.state.access_token}&personFields=birthdays,emailAddresses,events,metadata,names,phoneNumbers,photos,userDefined&pageSize=200`
       );
       const json = await response.json();
-      let items = json.connections;
-      console.log("!!!!!", json);
-      console.log("?????", items);
-
+      const items = json.connections;
       this.setState({
         contacts: items
       });
+      console.log("CONTACTS ASSIGNED:", items);
     };
-
     request();
   }
 
@@ -102,34 +91,36 @@ class OAuth extends Component {
     if (this.state.isSignedIn) {
       document.querySelector(".OAuthInline").style.display = "none";
       return <p>Hello {this.state.googleUser}, you are now signed in!</p>;
-    } else {
-      return (
-        <div>
-          <p>You are not signed in. Click here to sign in.</p>
-          <button id="loginButton">Login with Google</button>
-        </div>
-      );
+      } else {
+        return (
+          <div>
+            <p>You are not signed in. Click here to sign in.</p>
+            <button id="loginButton">Login with Google</button>
+          </div>
+        );
+      }
     }
-  }
 
-  render() {
-    return (
-      <div className="OAuthInline">
-        {this.getContent()}
-        <style>{`
-          .OAuthInline {
-            position: fixed;
-            bottom: 0px;
-            z-index: 99;
-            width: 100%;
-            background-color: red;
-          }
+    render() {
+      return (
+        <div className="OAuthInline">
+          {this.getContent()}
+          <style>{`
+              .OAuthInline {
+                position: fixed;
+                bottom: 0px;
+                z-index: 99;
+                width: 100%;
+                background-color: red;
+              }
 
 
               `}</style>
-      </div>
-    );
-  }
-}
+          </div>
+        );
+      }
+    }
 
-export default OAuth;
+    OAuth = connect()(OAuth);
+
+    export default OAuth;

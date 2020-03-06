@@ -2,21 +2,14 @@ import React from 'react';
 import Contact from './Contact';
 
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function ContactList(props){
 
   return (
     <div className="inContactList">
 
-      {props.contactList.map((contact) =>
-        <Contact name={contact.name}
-          phone={contact.phone}
-          id={contact.id}
-
-          key={contact.id}
-          />
-      )}
+<h1>hello</h1>
 
 
 
