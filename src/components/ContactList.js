@@ -38,7 +38,6 @@ function ContactList(props) {
 
 export default ContactList;
 
-// birthday={contact.birthdays[0].date}
 // email={contact.emailAddresses[0].value}
 // events={contact.events[0]}
 // phone={contact.phoneNumbers[0].value}

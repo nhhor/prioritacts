@@ -3,34 +3,32 @@ import React from 'react';
 function Contact(props){
 
   let birthday = () => {
-    let bYear = [props.birthday].map(e => e.year)
-    let bMonth = [props.birthday].map(e => e.month)
-    let bDay = [props.birthday].map(e => e.day)
-    let bString = (`${bYear[0]}-${bMonth[0]}-${bDay[0]}`);
-    let today = ( `${Date()}`.substr(4,11) )
+    let bYear = [props.birthday].map(e => e.year)[0]
+    let bMonth = [props.birthday].map(e => e.month)[0]
+    let bDay = [props.birthday].map(e => e.day)[0]
+    let bString = (`${bYear}-${bMonth}-${bDay}`);
 
-    if (bString == 'undefined-undefined-undefined') {
+
+    if (bString === 'undefined-undefined-undefined') {
       return;
-    } else if (typeof(bMonth) == 'undefined') {
-      return;
+    } else if (bMonth === 'undefined') {
+      return
     } else {
-
-      let one_day = 1000 * 60 * 60 * 24
-      let present_date = new Date();
-      let birth_day = new Date(present_date.getFullYear(), bMonth, bDay)
-
-      if (present_date.getMonth() == bMonth && present_date.getdate() > bDay)
-      birth_day.setFullYear(birth_day.getFullYear() + 1)
-
-      let Result = Math.round(birth_day.getTime() - present_date.getTime()) / (one_day);
-
-      let Final_Result = Result.toFixed(0);
-      let bDayIn = `Birthday in ${Final_Result} days! (on ${bMonth}/${bDay})`
-      return bDayIn;
+      var one_day = 1000 * 60 * 60 * 24
+      var today = new Date();
+      var birthDate = new Date(today.getFullYear(), (bMonth-1), bDay+1)
+      if (today.getMonth() > (bMonth+1) && today.getdate() > bDay)
+      birthDate.setFullYear(birthDate.getFullYear() + 1)
+      var bResult = Math.round(birthDate.getTime() - today.getTime()) / (one_day);
+      var finalResult = bResult.toFixed(0);
+      let string = `Birthday in ${finalResult} days!`
+      if (finalResult >=0 && finalResult <= 45) {
+        return string
+      } else {
+        return
+      }
     }
   };
-
-
 
   return (
     <div className='contactSection'>
