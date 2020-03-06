@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import "./App.css";
+import "./../App.css";
 
 import { Switch, Route } from "react-router-dom";
 import ContactList from "./ContactList";
@@ -9,7 +9,7 @@ import Settings from "./Settings";
 import Footer from "./Footer";
 import OAuth from "./OAuth";
 
-import { loadContacts } from './actions/loadContacts';
+import { loadContacts } from './../actions/loadContacts';
 
 class App extends React.Component {
 
@@ -26,17 +26,8 @@ class App extends React.Component {
 
         <div className="appBody">
 
-
-
-<button onClick={this.simpleAction}>Test redux action</button>
-  <pre>
-   {
-    JSON.stringify(this.props)
-   }
-  </pre>
-
           <Switch>
-            <Route exact path="/" render={() => (<ContactList />)} />
+            <Route exact path="/" render={() => (<ContactList contactList={this.props.contactsReducer.contacts}/>)} />
           </Switch>
           <Switch>
             <Route path="/Settings" render={() => <Settings />} />
@@ -78,7 +69,6 @@ class App extends React.Component {
       );
     }
   }
-
 
 
   const mapStateToProps = state => ({

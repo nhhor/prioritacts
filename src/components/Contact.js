@@ -6,8 +6,7 @@ function Contact(props){
   <div className='contactSection'>
     <div  className='contactRow' id={'contactCell_' + props.id}>
       <p className='contactName'>{props.name}</p>
-      <p className='contactPhone'>{props.phone}</p>
-      <p className='contactId'>{props.id}</p>
+      <p className='contactPhone'>{props.id}</p>
       <style>{`
           .contactSection {
             width: 96%;

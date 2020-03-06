@@ -1,6 +1,7 @@
 /* global gapi */
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { loadContacts } from "./../actions";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
@@ -11,9 +12,11 @@ const DISCOVERY_DOCS =
 
 const SCOPE = "https://www.googleapis.com/auth/contacts";
 
+
 class OAuth extends Component {
   constructor(props) {
     super(props);
+    console.log('LOG FROM OAuth: super(props)', props)
 
     this.state = {
       isSignedIn: false,
@@ -23,6 +26,7 @@ class OAuth extends Component {
       access_token: null,
     };
   }
+
 
   componentDidMount() {
     const successCallback = this.onSuccess.bind(this);
@@ -57,7 +61,7 @@ class OAuth extends Component {
     });
   }
 
-  onSuccess() {
+  onSuccess(props) {
     console.log(`TRIGGER on success.    🎩${this.auth2.currentUser.get().Qt.Ad}👠    now signed in.`);
     this.setState({
       isSignedIn: true,
@@ -76,6 +80,14 @@ class OAuth extends Component {
         contacts: items
       });
       console.log("CONTACTS ASSIGNED:", items);
+
+
+
+      const { dispatch } = this.props;
+
+      dispatch(loadContacts(items));
+
+
     };
     request();
   }
@@ -91,36 +103,36 @@ class OAuth extends Component {
     if (this.state.isSignedIn) {
       document.querySelector(".OAuthInline").style.display = "none";
       return <p>Hello {this.state.googleUser}, you are now signed in!</p>;
-      } else {
-        return (
-          <div>
-            <p>You are not signed in. Click here to sign in.</p>
-            <button id="loginButton">Login with Google</button>
-          </div>
-        );
-      }
-    }
-
-    render() {
+    } else {
       return (
-        <div className="OAuthInline">
-          {this.getContent()}
-          <style>{`
-              .OAuthInline {
-                position: fixed;
-                bottom: 0px;
-                z-index: 99;
-                width: 100%;
-                background-color: red;
-              }
-
-
-              `}</style>
-          </div>
-        );
-      }
+        <div>
+        <p>You are not signed in. Click here to sign in.</p>
+        <button id="loginButton">Login with Google</button>
+        </div>
+      );
     }
+  }
 
-    OAuth = connect()(OAuth);
+  render() {
+    return (
+      <div className="OAuthInline">
+      {this.getContent()}
+      <style>{`
+        .OAuthInline {
+          position: fixed;
+          bottom: 0px;
+          z-index: 99;
+          width: 100%;
+          background-color: red;
+        }
 
-    export default OAuth;
+
+        `}</style>
+        </div>
+      );
+    }
+  }
+
+  OAuth = connect()(OAuth);
+
+  export default OAuth;

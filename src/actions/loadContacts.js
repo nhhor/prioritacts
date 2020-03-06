@@ -1,6 +1,6 @@
-export const loadContacts = () => dispatch => {
+export const loadContacts = (items) => dispatch => {
  dispatch({
   type: 'LOAD_CONTACTS',
-  payload: 'result_of_simple_action'
+  payload: items
  })
 }
