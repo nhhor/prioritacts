@@ -10,13 +10,15 @@ function ContactList(props) {
       return <h1>Hello!</h1>
     } else {
       return props.contactList.map((contact, index) => <Contact
-      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
       birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
       email={(contact.emailAddresses ? contact.emailAddresses[0].value : '')}
-      photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
       events={(contact.events ? contact.events : '')}
-      index={index}
       id={contact.resourceName}
+      index={index}
+      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
+      phone={(contact.phoneNumbers ? contact.phoneNumbers[0].value : '')}
+      photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
+      userDefined={(contact.userDefined ? contact.userDefined : '')}
       key={contact.resourceName}/>)
     }
   };
@@ -40,6 +42,3 @@ function ContactList(props) {
 }
 
 export default ContactList;
-
-// events={contact.events[0]}
-// phone={contact.phoneNumbers[0].value}

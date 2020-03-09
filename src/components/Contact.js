@@ -62,13 +62,29 @@ function Contact(props){
     }
   };
 
+  let userDefined = () => {
+    if (props.userDefined === '' || typeof(props.userDefined) === undefined) {
+      return
+    } else {
+      const userDefinedFields = props.userDefined.map(x => {
+        if (x.key === '~prioritacts~frequency~') {
+          return x.value;
+        } else {
+          console.log(x.key);
+        }
+        
+      });
+      return userDefinedFields;
+      }
+  };
+
   return (
     <div className='contactSection'>
       <div className='contactRow' id={'contactCell_' + props.id}>
         <div className='gridParent'>
 
           <div className='gridDiv1'>
-            <img className='contactPhoto' src={props.photo}/>
+            <img className='contactPhoto' alt='gProfile' src={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -76,7 +92,7 @@ function Contact(props){
           </div>
 
           <div className='gridDiv3'>
-            <p>{props.index}) ...freq</p>
+            <p>{props.index}) <span className='contactUserDefined'>{userDefined()}</span></p>
           </div>
 
           <div className='gridDiv4'>
@@ -89,10 +105,10 @@ function Contact(props){
               <a className='contactMethod' href={'mailto:'+props.email}>
                 <button className="buttonEMail">Email</button>
               </a>
-              <a className='contactMethod' href={'tel:'+props.email}>
+              <a className='contactMethod' href={'sms:'+props.phone}>
                 <button className="buttonText">Text</button>
               </a>
-              <a className='contactMethod' href={'tel:'+props.email}>
+              <a className='contactMethod' href={'tel:'+props.phone}>
                 <button className="buttonPhone">Call</button>
               </a>
             </p>

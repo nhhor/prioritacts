@@ -74,18 +74,14 @@ class OAuth extends Component {
       const response = await fetch(
         `https://people.googleapis.com/v1/people/me/connections?access_token=${this.state.access_token}&personFields=birthdays,emailAddresses,events,metadata,names,phoneNumbers,photos,userDefined&pageSize=200`
       );
-      const json = await response.json();
-      const items = json.connections;
-
-      const access_token = this.auth2.currentUser.get().uc.access_token
-      console.log(access_token);
-
       const { dispatch } = this.props;
 
+      const json = await response.json();
+      const items = json.connections;
       dispatch(loadContacts(items));
+
+      const access_token = this.auth2.currentUser.get().uc.access_token
       dispatch(setToken(access_token));
-
-
     };
     request();
   }

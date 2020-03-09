@@ -9,7 +9,6 @@ import Settings from "./Settings";
 import Footer from "./Footer";
 import OAuth from "./OAuth";
 
-import { loadContacts } from './../actions/loadContacts';
 
 class App extends React.Component {
 
