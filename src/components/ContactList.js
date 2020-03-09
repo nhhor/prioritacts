@@ -16,6 +16,7 @@ function ContactList(props) {
       photo={(contact.photos ? contact.photos[0].url : '')}
       index={index}
       id={contact.resourceName}
+      accessToken={props.accessToken}
       key={contact.resourceName}/>)
     }
   };

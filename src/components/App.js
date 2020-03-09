@@ -27,7 +27,9 @@ class App extends React.Component {
         <div className="appBody">
 
           <Switch>
-            <Route exact path="/" render={() => (<ContactList contactList={this.props.contactsReducer.contacts}/>)} />
+            <Route exact path="/" render={() => (<ContactList contactList={this.props.contactsReducer.contacts}
+            accessToken={this.props.tokenReducer.token}
+                  />)} />
           </Switch>
           <Switch>
             <Route path="/Settings" render={() => <Settings />} />
@@ -70,13 +72,8 @@ class App extends React.Component {
     }
   }
 
-
   const mapStateToProps = state => ({
    ...state
  });
 
-  const mapDispatchToProps = dispatch => ({
- loadContacts: () => dispatch(loadContacts())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

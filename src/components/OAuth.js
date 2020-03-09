@@ -1,7 +1,7 @@
 /* global gapi */
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { loadContacts } from "./../actions";
+import { loadContacts, setToken } from "./../actions";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
@@ -76,16 +76,14 @@ class OAuth extends Component {
       );
       const json = await response.json();
       const items = json.connections;
-      this.setState({
-        contacts: items
-      });
-      console.log("CONTACTS ASSIGNED:", items);
 
-
+      const access_token = this.auth2.currentUser.get().uc.access_token
+      console.log(access_token);
 
       const { dispatch } = this.props;
 
       dispatch(loadContacts(items));
+      dispatch(setToken(access_token));
 
 
     };

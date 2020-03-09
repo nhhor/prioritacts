@@ -34,7 +34,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1'>
-            <img className='contactPhoto' src={props.photo+'?access_token='+process.env.REACT_APP_ACCESS_TOKEN}/>
+            <img className='contactPhoto' src={props.photo+'?access_token='+props.accessToken}/>
           </div>
 
           <div className='gridDiv2'>

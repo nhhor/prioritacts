@@ -8,3 +8,10 @@ export const loadContacts = (items) => dispatch => {
   payload: items,
  })
 }
+
+export const setToken = (token) => dispatch => {
+ dispatch({
+  type: 'SET_TOKEN',
+  payload: token
+ })
+}
