@@ -3,28 +3,62 @@ import React from 'react';
 function Contact(props){
 
   let birthday = () => {
-    let bYear = [props.birthday].map(e => e.year)[0]
-    let bMonth = [props.birthday].map(e => e.month)[0]
-    let bDay = [props.birthday].map(e => e.day)[0]
-    let bString = (`${bYear}-${bMonth}-${bDay}`);
+    const bYear = [props.birthday].map(e => e.year)[0]
+    const bMonth = [props.birthday].map(e => e.month)[0]
+    const bDay = [props.birthday].map(e => e.day)[0]
+    const bString = (`${bYear}-${bMonth}-${bDay}`);
     if (bString === 'undefined-undefined-undefined') {
       return;
     } else if (bMonth === 'undefined') {
       return
     } else {
-      var one_day = 1000 * 60 * 60 * 24
-      var today = new Date();
-      var birthDate = new Date(today.getFullYear(), (bMonth-1), bDay+1)
+      const today = new Date();
+      const birthDate = new Date(today.getFullYear(), (bMonth-1), bDay+1)
       if (today.getMonth() > (bMonth+1) && today.getdate() > bDay)
       birthDate.setFullYear(birthDate.getFullYear() + 1)
-      var bResult = Math.round(birthDate.getTime() - today.getTime()) / (one_day);
-      var finalResult = bResult.toFixed(0);
-      let string = `Birthday in ${finalResult} days (on ${bMonth}/${bDay})!`
+      const bResult = Math.round(birthDate.getTime() - today.getTime()) / (86400000);
+      const finalResult = bResult.toFixed(0);
+      const string = `Birthday in ${finalResult} days (on ${bMonth}/${bDay})!`
       if (finalResult >=0 && finalResult <= 45) {
         return string
       } else {
         return
       }
+    }
+  };
+
+  let events = () => {
+    if (props.events === '' || typeof(props.events) === undefined) {
+      return
+    } else {
+      function compare(a, b) {
+        const eventA = new Date(a.date.year, a.date.month, a.date.day);
+        const eventB = new Date(b.date.year, b.date.month, b.date.day);
+        let comparison = 0;
+        if (eventA > eventB) {
+          comparison = 1;
+        } else if (eventA < eventB) {
+          comparison = -1;
+        }
+        return comparison;
+      }
+      const length = props.events.length
+      const mostRecentEvent = props.events.sort(compare)[length-1]
+      const today = new Date();
+      const eventDate = new Date(mostRecentEvent.date.year, (mostRecentEvent.date.month-1), mostRecentEvent.date.day)
+      const bResult = Math.round(eventDate.getTime() - today.getTime()) / (86400000);
+      const finalResult = bResult.toFixed(0) * -1;
+      let eventString;
+      if ( finalResult < 0 ) {
+        eventString = `in T${finalResult} days`
+      } else if ( finalResult === 0 ) {
+        eventString = `Today!`
+      } else if ( finalResult < 365 ) {
+        eventString = `${finalResult} days ago`
+      } else {
+        eventString = `${(finalResult/365).toFixed(2)} years ago`
+      }
+      return `>Event: ${mostRecentEvent.formattedType}: ${mostRecentEvent.date.year}-${mostRecentEvent.date.month}-${mostRecentEvent.date.day} (${eventString})`;
     }
   };
 
@@ -34,7 +68,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1'>
-            <img className='contactPhoto' src={props.photo+'?access_token='+props.accessToken}/>
+            <img className='contactPhoto' src={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -47,7 +81,8 @@ function Contact(props){
 
           <div className='gridDiv4'>
             <p className='contactBirthday'>{birthday()}</p>
-            <p className='contactBirthday'>{birthday()}</p>
+
+            <p className='contactEvent'>{events()}</p>
           </div>
           <div className='gridDiv5'>
             <p className='communicateRow'>

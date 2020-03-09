@@ -13,10 +13,10 @@ function ContactList(props) {
       name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
       birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
       email={(contact.emailAddresses ? contact.emailAddresses[0].value : '')}
-      photo={(contact.photos ? contact.photos[0].url : '')}
+      photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
+      events={(contact.events ? contact.events : '')}
       index={index}
       id={contact.resourceName}
-      accessToken={props.accessToken}
       key={contact.resourceName}/>)
     }
   };
@@ -41,6 +41,5 @@ function ContactList(props) {
 
 export default ContactList;
 
-// photo={contact.photos[0].url}
 // events={contact.events[0]}
 // phone={contact.phoneNumbers[0].value}
