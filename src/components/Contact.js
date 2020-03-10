@@ -94,7 +94,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt='gProfile' src={props.photo}/>
+            <img className='contactPhoto' alt='src...' id={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -173,6 +173,7 @@ function Contact(props){
             width: 50px;
             height: 50px;
             border-radius: 50px;
+            border: 1px solid grey;
           }
 
           .communicateRow {

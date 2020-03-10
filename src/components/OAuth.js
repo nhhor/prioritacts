@@ -7,8 +7,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-const DISCOVERY_DOCS =
-"https://people.googleapis.com/$discovery/rest?version=v1";
+const DISCOVERY_DOCS = "https://people.googleapis.com/$discovery/rest?version=v1";
 
 const SCOPE = "https://www.googleapis.com/auth/contacts";
 
@@ -21,7 +20,6 @@ class OAuth extends Component {
     this.state = {
       isSignedIn: false,
       googleUser: "",
-      contacts: null,
       err: null,
       access_token: null,
     };
