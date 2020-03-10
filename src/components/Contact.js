@@ -86,9 +86,21 @@ function Contact(props){
   }
 
   let handleVisitClick = (id, etag, userDefined) => {
-    console.log(`In contact.js, handleVisitClick'ed on ${id} / ${etag}`);
+    let today = new Date;
+    let userDefinedUpdate = []
+    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
+      userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
+    } else {
+      let x = userDefined.map(function(e, index) {
+        if (e.key === '~prioritacts~lastContact~') {
+          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
+        } else {
+          userDefinedUpdate.push(e)
+        }
+      });
+    }
     const { dispatch } = props;
-    dispatch(fetchNewVisit(id, etag, userDefined, props.token));
+    dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
   }
 
 

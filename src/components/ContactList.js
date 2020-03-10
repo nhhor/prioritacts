@@ -20,7 +20,7 @@ function ContactList(props) {
       index={index}
       phone={(contact.phoneNumbers ? contact.phoneNumbers[0].value : '')}
       photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
-      userDefined={(contact.userDefined ? contact.userDefined : '')}
+      userDefined={(contact.userDefined ? contact.userDefined : [])}
       key={contact.resourceName}/>)
     }
   };

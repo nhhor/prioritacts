@@ -18,14 +18,7 @@ export function fetchNewVisit(id, etag, userDefined, token) {
     return fetch(`https://people.googleapis.com/v1/${id}:updateContact?access_token=${token}&updatePersonFields=userDefined&alt=json`, {
       method: 'PATCH',
       body: JSON.stringify({
-        userDefined: [{
-          key: '~prioritacts~lastContact~',
-          value: '2020-3-10'
-        },
-        {
-          key: '~prioritacts~frequency~',
-          value: '7'
-        }],
+        userDefined: userDefined,
         etag: etag,
       }),
       headers: {
