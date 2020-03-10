@@ -10,12 +10,14 @@ function ContactList(props) {
       return <h1>Hello!</h1>
     } else {
       return props.contactList.map((contact, index) => <Contact
+      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
+      token={props.accessToken}
+      id={contact.resourceName}
+      etag={contact.etag}
       birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
       email={(contact.emailAddresses ? contact.emailAddresses[0].value : '')}
       events={(contact.events ? contact.events : '')}
-      id={contact.resourceName}
       index={index}
-      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
       phone={(contact.phoneNumbers ? contact.phoneNumbers[0].value : '')}
       photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
       userDefined={(contact.userDefined ? contact.userDefined : '')}

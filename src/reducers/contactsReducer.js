@@ -20,6 +20,8 @@ export default (state = initialState.contacts, action) => {
     return {
       contacts: sortedPayload
     }
+    case types.LOG_EVENT:
+      console.log('case types.LOG_EVENT:');
     default:
     return state
   }

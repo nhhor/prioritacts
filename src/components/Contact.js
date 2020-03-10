@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { loadContacts, setToken, fetchNewVisit } from "./../actions";
 
 function Contact(props){
 
@@ -83,8 +85,10 @@ function Contact(props){
     x.style.display = x.style.display == 'none' ? 'block' : 'none';
   }
 
-  let handleSettingsClick = (arg) => {
-    console.log(`dispatch settings update for ${arg}`);
+  let handleVisitClick = (id, etag, userDefined) => {
+    console.log(`In contact.js, handleVisitClick'ed on ${id} / ${etag}`);
+    const { dispatch } = props;
+    dispatch(fetchNewVisit(id, etag, userDefined, props.token));
   }
 
 
@@ -103,8 +107,8 @@ function Contact(props){
 
           <div className='gridDiv3'>
             <p>
-              <span className='contactUserDefined'>{userDefined()}</span>
-              <span className='settingsSpan' onClick={() =>{handleSettingsClick(props.id)}}>{`<<`}</span>
+              <span className='contactUserDefined'>{props.index}) {userDefined()}</span>
+              <span className='settingsSpan'>{`<<`}</span>
             </p>
           </div>
 
@@ -123,9 +127,9 @@ function Contact(props){
               <a className='contactMethod' href={'tel:'+props.phone}>
                 <button className="buttonPhone">Call</button>
               </a>
-              <a className='contactMethod' href="">
-                <button className="buttonVisit">Visit</button>
-              </a>
+              <span className='contactMethod' href="">
+                <button className="buttonVisit" onClick={() =>{handleVisitClick(props.id, props.etag, props.userDefined)}}>Visit</button>
+              </span>
             </p>
           </div>
 
@@ -246,5 +250,7 @@ function Contact(props){
       </div>
     );
   }
+
+  Contact = connect()(Contact);
 
   export default Contact;
