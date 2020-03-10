@@ -50,15 +50,15 @@ function Contact(props){
       const finalResult = bResult.toFixed(0) * -1;
       let eventString;
       if ( finalResult < 0 ) {
-        eventString = `in T${finalResult} days`
+        eventString = `Upcoming event in ${finalResult*-1} days, on ${mostRecentEvent.date.month}/${mostRecentEvent.date.day}!`
       } else if ( finalResult === 0 ) {
-        eventString = `Today!`
+        eventString = `Upcoming event today!`
       } else if ( finalResult < 365 ) {
-        eventString = `${finalResult} days ago`
+        eventString = `Last interaction ${finalResult} days ago.`
       } else {
-        eventString = `${(finalResult/365).toFixed(2)} years ago`
+        eventString = `Last interaction ${(finalResult/365).toFixed(2)} years ago.`
       }
-      return `>Event: ${mostRecentEvent.formattedType}: ${mostRecentEvent.date.year}-${mostRecentEvent.date.month}-${mostRecentEvent.date.day} (${eventString})`;
+      return `>${eventString}`;
     }
   };
 
@@ -68,22 +68,32 @@ function Contact(props){
     } else {
       const userDefinedFields = props.userDefined.map(x => {
         if (x.key === '~prioritacts~frequency~') {
-          return x.value;
+          return `Frequency set: ${x.value}`;
         } else {
-          console.log(x.key);
+          return
         }
-        
+
       });
       return userDefinedFields;
-      }
+    }
   };
+
+  let handleDetailClick = (arg) => {
+    let x = document.getElementById(arg)
+    x.style.display = x.style.display == 'none' ? 'block' : 'none';
+  }
+
+  let handleSettingsClick = (arg) => {
+    console.log(`dispatch settings update for ${arg}`);
+  }
+
 
   return (
     <div className='contactSection'>
       <div className='contactRow' id={'contactCell_' + props.id}>
         <div className='gridParent'>
 
-          <div className='gridDiv1'>
+          <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
             <img className='contactPhoto' alt='gProfile' src={props.photo}/>
           </div>
 
@@ -92,15 +102,17 @@ function Contact(props){
           </div>
 
           <div className='gridDiv3'>
-            <p>{props.index}) <span className='contactUserDefined'>{userDefined()}</span></p>
+            <p>
+              <span className='contactUserDefined'>{userDefined()}</span>
+              <span className='settingsSpan' onClick={() =>{handleSettingsClick(props.id)}}>{`<<`}</span>
+            </p>
           </div>
 
-          <div className='gridDiv4'>
+          <div className='gridDiv4' id={'gridDiv4_' + props.id}>
             <p className='contactBirthday'>{birthday()}</p>
-
             <p className='contactEvent'>{events()}</p>
           </div>
-          <div className='gridDiv5'>
+          <div className='gridDiv5'  id={'gridDiv5_' + props.id}>
             <p className='communicateRow'>
               <a className='contactMethod' href={'mailto:'+props.email}>
                 <button className="buttonEMail">Email</button>
@@ -110,6 +122,9 @@ function Contact(props){
               </a>
               <a className='contactMethod' href={'tel:'+props.phone}>
                 <button className="buttonPhone">Call</button>
+              </a>
+              <a className='contactMethod' href="">
+                <button className="buttonVisit">Visit</button>
               </a>
             </p>
           </div>
@@ -152,7 +167,6 @@ function Contact(props){
 
           .contactRow p {
             margin: 0px;
-            // padding: 3px;
           }
 
           .contactPhoto {
@@ -173,7 +187,7 @@ function Contact(props){
 
             background-color: rgba(255,0,0,.33);
             border-radius: 25px;
-            width: 25%;
+            width: 20%;
             font-weight: bolder;
             padding-left: 2%;
             padding-right: 2%;
@@ -182,9 +196,9 @@ function Contact(props){
           }
 
           .buttonText {
-            background-color: rgba(0,255,0,.33);
+            background-color: rgba(255,255,0,.33);
             border-radius: 25px;
-            width: 25%;
+            width: 20%;
             font-weight: bolder;
             padding-left: 2%;
             padding-right: 2%;
@@ -193,14 +207,38 @@ function Contact(props){
           }
 
           .buttonPhone {
-            background-color: rgba(0,0,255,.33);
+            background-color: rgba(0,255,0,.33);
             border-radius: 25px;
-            width: 25%;
+            width: 20%;
             font-weight: bolder;
             padding-left: 2%;
             padding-right: 2%;
             margin-left: 2%;
             margin-right: 2%;
+          }
+
+          .buttonVisit {
+            background-color: rgba(0,0,255,.33);
+            border-radius: 25px;
+            width: 20%;
+            font-weight: bolder;
+            padding-left: 2%;
+            padding-right: 2%;
+            margin-left: 2%;
+            margin-right: 2%;
+          }
+
+          .settingsSpan {
+            float: right;
+          }
+          .contactUserDefined{
+            font-size: 0.75em;
+          }
+          .contactBirthday{
+            font-size: 0.75em;
+          }
+          .contactEvent{
+            font-size: 0.75em;
           }
 
           `}</style>
