@@ -28,6 +28,7 @@ function Contact(props){
       }
     }
   };
+  
 
   let events = () => {
     if (props.events === '' || typeof(props.events) === undefined) {
@@ -65,12 +66,14 @@ function Contact(props){
   };
 
   let userDefined = () => {
-    if (props.userDefined === '' || typeof(props.userDefined) === undefined) {
+    if (props.userDefined === '' || typeof(props.userDefined) === undefined || props.userDefined === [] ) {
       return
     } else {
       const userDefinedFields = props.userDefined.map(x => {
         if (x.key === '~prioritacts~frequency~') {
           return `Frequency set: ${x.value}`;
+        } else if (x.key === '~prioritacts~lastContact~') {
+          return `Last visit: ${x.value}`;
         } else {
           return
         }
