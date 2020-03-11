@@ -90,7 +90,7 @@ function Contact(props){
           let interactionDate = new Date((iS[0]),(iS[1]-1),(iS[2]))
           let today = new Date()
           let diff = Math.round((today.getTime() - interactionDate.getTime()) / (86400000))
-          return `Last interaction ${diff} days ago.`;
+          return `Last interaction (${iS[3]}) was ${diff} days ago.`;
         } else {
           return '';
         }
@@ -104,15 +104,15 @@ function Contact(props){
     x.style.display = x.style.display === 'none' ? 'block' : 'none';
   }
 
-  let handleVisitClick = (id, etag, userDefined) => {
+  let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
     let userDefinedUpdate = []
     if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
-      userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
+      userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
         if (e.key === '~prioritacts~lastContact~') {
-          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
+          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
         } else {
           userDefinedUpdate.push(e)
         }
@@ -121,6 +121,13 @@ function Contact(props){
     }
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
+    console.log(redirect);
+    if (interactionType === 'visit') {
+      return
+    } else {
+      console.log(`LOG: Redirect to ${redirect} triggered!`);
+      window.open(redirect, "_blank");
+    }
   }
 
 
@@ -151,17 +158,15 @@ function Contact(props){
           </div>
           <div className='gridDiv5'  id={'gridDiv5_' + props.id}>
             <p className='communicateRow'>
-              <a className='contactMethod' href={'mailto:'+props.email}>
-                <button className="buttonEMail">Email</button>
-              </a>
-              <a className='contactMethod' href={'sms:'+props.phone}>
-                <button className="buttonText">Text</button>
-              </a>
-              <a className='contactMethod' href={'tel:'+props.phone}>
-                <button className="buttonPhone">Call</button>
-              </a>
-              <span className='contactMethod' href="">
-                <button className="buttonVisit" onClick={() =>{handleVisitClick(props.id, props.etag, props.userDefined)}}>Visit</button>
+              <span className='contactMethod'>
+                <button className="buttonEMail" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'email', `mailto:${props.email}`)}}>Email</button>
+              </span>
+              <span className='contactMethod'>
+                <button className="buttonText" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'text', `sms:${props.phone}`)}}>Text</button>
+              </span>
+                <button className="buttonPhone" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'call', `tel:${props.phone}`)}}>Call</button>
+              <span className='contactMethod'>
+                <button className="buttonVisit" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'visit', 'visit')}}>Visit</button>
               </span>
             </p>
           </div>
