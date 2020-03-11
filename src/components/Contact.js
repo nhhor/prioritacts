@@ -29,7 +29,6 @@ function Contact(props){
     }
   };
 
-
   let events = () => {
     if (props.events === '' || typeof(props.events) === undefined) {
       return
@@ -89,8 +88,15 @@ function Contact(props){
           let iS = x.value.split('-')
           let interactionDate = new Date((iS[0]),(iS[1]-1),(iS[2]))
           let today = new Date()
-          let diff = Math.round((today.getTime() - interactionDate.getTime()) / (86400000))
-          return `Last interaction (${iS[3]}) was ${diff} days ago.`;
+          let roundedToday = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+          let diff = Math.round((roundedToday.getTime() - interactionDate.getTime()) / (86400000))
+          if (diff === 0) {
+            return `Last interaction (${iS[3]}) was today!`;
+          } else if (diff < 365 ) {
+            return `Last interaction (${iS[3]}) was ${diff} days ago.`;
+          } else {
+            return `Last interaction (${iS[3]}) was ${(diff/365).toFixed(2)} years ago.`;
+          }
         } else {
           return '';
         }
@@ -103,7 +109,6 @@ function Contact(props){
     let x = document.getElementById(arg)
     x.style.display = x.style.display === 'none' ? 'block' : 'none';
   }
-
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
     let userDefinedUpdate = []
