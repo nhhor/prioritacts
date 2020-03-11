@@ -4,6 +4,9 @@ import { fetchNewVisit } from "./../actions";
 
 function Contact(props){
 
+  let animationTestNumberP = (Math.floor(Math.random()*101)+75)
+  let animationTestNumberN = (Math.floor(Math.random()*101)-125)
+
   let birthday = () => {
     const bYear = [props.birthday].map(e => e.year)[0]
     const bMonth = [props.birthday].map(e => e.month)[0]
@@ -133,7 +136,7 @@ function Contact(props){
   }
 
   return (
-    <div className='contactSection'>
+    <div className={'contactSection ' + props.animationTest}>
       <div className='contactRow' id={'contactCell_' + props.id}>
         <div className='gridParent'>
 
@@ -286,6 +289,88 @@ function Contact(props){
           }
           .contactLastInteraction{
             font-size: 0.75em;
+          }
+
+          .animationTest0 {
+            animation: div_animation_effect0 .25s 1;
+          }
+          .animationTest1 {
+            animation: div_animation_effect1 .5s 1;
+          }
+          .animationTest2 {
+            animation: div_animation_effect2 .75s 1;
+          }
+          .animationTest3 {
+            animation: div_animation_effect3 1s 1;
+          }
+          .animationTest4 {
+            animation: div_animation_effect4 1.25s 1;
+          }
+          .animationTest5 {
+            animation: div_animation_effect5 1.5s 1;
+          }
+          .animationTest6 {
+            animation: div_animation_effect6 1.75s 1;
+          }
+          .animationTest7 {
+            animation: div_animation_effect7 2s 1;
+          }
+
+          @keyframes div_animation_effect0 {
+            0%   { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            50%  { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect1 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect2 {
+            0%   { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect3 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect4 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect5 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect6 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          }
+          @keyframes div_animation_effect7 {
+            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
+            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
+            100% { transform: translate(0px, 0vh);}
+            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
+            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
           }
 
           `}</style>

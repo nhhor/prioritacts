@@ -14,6 +14,7 @@ function ContactList(props) {
       token={props.accessToken}
       id={contact.resourceName}
       etag={contact.etag}
+      animationTest={'animationTest'+index}
       birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
       email={(contact.emailAddresses ? contact.emailAddresses[0].value : '')}
       events={(contact.events ? contact.events : '')}
