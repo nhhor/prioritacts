@@ -107,7 +107,7 @@ function Contact(props){
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
     let userDefinedUpdate = []
-    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
+    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
@@ -116,20 +116,16 @@ function Contact(props){
         } else {
           userDefinedUpdate.push(e)
         }
-        return;
       });
     }
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
-    console.log(redirect);
     if (interactionType === 'visit') {
       return
     } else {
-      console.log(`LOG: Redirect to ${redirect} triggered!`);
-      window.open(redirect, "_blank");
+      window.open(redirect, '_blank')
     }
   }
-
 
   return (
     <div className='contactSection'>
@@ -159,12 +155,12 @@ function Contact(props){
           <div className='gridDiv5'  id={'gridDiv5_' + props.id}>
             <p className='communicateRow'>
               <span className='contactMethod'>
-                <button className="buttonEMail" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'email', `mailto:${props.email}`)}}>Email</button>
+                <button className="buttonEMail" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'email', `https://mail.google.com/mail/?view=cm&fs=1&to=${props.email}&body=%0A%0A%0A~This message was created with the Prioritacts App!~`)}}>Email</button>
               </span>
               <span className='contactMethod'>
                 <button className="buttonText" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'text', `sms:${props.phone}`)}}>Text</button>
               </span>
-                <button className="buttonPhone" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'call', `tel:${props.phone}`)}}>Call</button>
+              <button className="buttonPhone" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'call', `tel:${props.phone}`)}}>Call</button>
               <span className='contactMethod'>
                 <button className="buttonVisit" onClick={() =>{handleInteractionClick(props.id, props.etag, props.userDefined, 'visit', 'visit')}}>Visit</button>
               </span>
