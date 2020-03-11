@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { loadContacts, setToken, fetchNewVisit } from "./../actions";
+import { fetchNewVisit } from "./../actions";
 
 function Contact(props){
 
@@ -28,7 +28,7 @@ function Contact(props){
       }
     }
   };
-  
+
 
   let events = () => {
     if (props.events === '' || typeof(props.events) === undefined) {
@@ -61,23 +61,39 @@ function Contact(props){
       } else {
         eventString = `Last interaction ${(finalResult/365).toFixed(2)} years ago.`
       }
-      return `>${eventString}`;
+      return `${eventString}`;
     }
   };
 
-  let userDefined = () => {
+  let userDefinedPriority = () => {
     if (props.userDefined === '' || typeof(props.userDefined) === undefined || props.userDefined === [] ) {
       return
     } else {
       const userDefinedFields = props.userDefined.map(x => {
         if (x.key === '~prioritacts~frequency~') {
-          return `Frequency set: ${x.value}`;
-        } else if (x.key === '~prioritacts~lastContact~') {
-          return `Last visit: ${x.value}`;
+          return `Priority set to ${x.value}`;
         } else {
-          return
+          return '';
         }
+      });
+      return userDefinedFields;
+    }
+  };
 
+  let userDefinedLastInteraction = () => {
+    if (props.userDefined === '' || typeof(props.userDefined) === undefined || props.userDefined === [] ) {
+      return
+    } else {
+      const userDefinedFields = props.userDefined.map(x => {
+        if (x.key === '~prioritacts~lastContact~') {
+          let iS = x.value.split('-')
+          let interactionDate = new Date((iS[0]),(iS[1]-1),(iS[2]))
+          let today = new Date()
+          let diff = Math.round((today.getTime() - interactionDate.getTime()) / (86400000))
+          return `Last interaction ${diff} days ago.`;
+        } else {
+          return '';
+        }
       });
       return userDefinedFields;
     }
@@ -85,21 +101,22 @@ function Contact(props){
 
   let handleDetailClick = (arg) => {
     let x = document.getElementById(arg)
-    x.style.display = x.style.display == 'none' ? 'block' : 'none';
+    x.style.display = x.style.display === 'none' ? 'block' : 'none';
   }
 
   let handleVisitClick = (id, etag, userDefined) => {
-    let today = new Date;
+    let today = new Date();
     let userDefinedUpdate = []
-    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
+    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
     } else {
-      let x = userDefined.map(function(e, index) {
+      userDefined.map(function(e, index) {
         if (e.key === '~prioritacts~lastContact~') {
           userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`})
         } else {
           userDefinedUpdate.push(e)
         }
+        return;
       });
     }
     const { dispatch } = props;
@@ -113,7 +130,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt='src...' id={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -122,13 +139,14 @@ function Contact(props){
 
           <div className='gridDiv3'>
             <p>
-              <span className='contactUserDefined'>{props.index}) {userDefined()}</span>
+              <span className='contactUserDefined'>{userDefinedPriority()}</span>
               <span className='settingsSpan'>{`<<`}</span>
             </p>
           </div>
 
           <div className='gridDiv4' id={'gridDiv4_' + props.id}>
             <p className='contactBirthday'>{birthday()}</p>
+            <p className='contactLastInteraction'>{userDefinedLastInteraction()}</p>
             <p className='contactEvent'>{events()}</p>
           </div>
           <div className='gridDiv5'  id={'gridDiv5_' + props.id}>
@@ -258,6 +276,9 @@ function Contact(props){
             font-size: 0.75em;
           }
           .contactEvent{
+            font-size: 0.75em;
+          }
+          .contactLastInteraction{
             font-size: 0.75em;
           }
 

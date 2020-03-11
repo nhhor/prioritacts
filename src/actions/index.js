@@ -12,9 +12,8 @@ export const setToken = (token) => ({
 
 export function fetchNewVisit(id, etag, userDefined, token) {
   console.log('started');
+  let json = 'test'
   return function (dispatch) {
-    dispatch(logEvent());
-
     return fetch(`https://people.googleapis.com/v1/${id}:updateContact?access_token=${token}&updatePersonFields=userDefined&alt=json`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -26,38 +25,11 @@ export function fetchNewVisit(id, etag, userDefined, token) {
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => dispatch(logEvent(json)))
   };
 }
 
-
-
-
-export const logEvent = () => ({
+export const logEvent = (json) => ({
   type: types.LOG_EVENT,
-  payload: 'none',
+  payload: json,
 });
-
-
-
-
-
-// fetch(`https://people.googleapis.com/v1/people/${resourceName_ID}:updateContact?access_token=${access_token}&updatePersonFields=userDefined&alt=json`, {
-//   method: ‘PATCH’,
-//   body: JSON.stringify({
-//     userDefined: [{
-//       key: 'test1',
-//       value: 'test2'
-//     },
-//     {
-//       key: 'test3',
-//       value: 'test4'
-//     }],
-//     etag: etag,
-//   }),
-//   headers: {
-//     "Content-type": "application/json; charset=UTF-8"
-//   }
-// })
-// .then(response => response.json())
-// .then(json => console.log(json))

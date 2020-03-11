@@ -21,7 +21,16 @@ export default (state = initialState.contacts, action) => {
       contacts: sortedPayload
     }
     case types.LOG_EVENT:
-      console.log('case types.LOG_EVENT:');
+    let logUpdatedState = state.contacts.map(contactToLogUpdate => {
+      if (contactToLogUpdate.resourceName === action.payload.resourceName) {
+        return action.payload;
+      } else {
+        return contactToLogUpdate;
+      }
+    });
+    return {
+      contacts: logUpdatedState
+    }
     default:
     return state
   }
