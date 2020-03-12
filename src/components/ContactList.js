@@ -18,8 +18,11 @@ function ContactList(props) {
           <br/>
           <br/>
           <h3>Your</h3>
-          <h3><div className='animationContacts'>contacts</div>
-          <div className='animationPrioritized'>prioritized</div></h3>
+          <h3>
+          <div className='animationContacts'>contacts</div>
+          <div className='animationDots'>...</div>
+          <div className='animationPrioritized'>prioritized</div>
+          </h3>
         </div>
     )
     } else {
@@ -55,27 +58,32 @@ function ContactList(props) {
         }
 
         .animationContacts {
-          animation: animationContactsEffect 1.75s 1;
+          animation: animationContactsEffect 4s infinite;
         }
         .animationPrioritized {
-          animation: animationPrioritizedEffect 2s 1;
+          animation: animationPrioritizedEffect 4s infinite;
+        }
+        .animationDots {
+          animation: animationDotsEffect 2s infinite;
         }
 
         @keyframes animationContactsEffect {
-          0%   { transform: translate(50vw, 50vh);}
-          25%  { transform: translate(50vw, 50vh);}
-          50%  { transform: translate(50vw, 50vh);}
-          100% { transform: translate(0px, 0vh);}
-          // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-          // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          0%   { transform: translate(-15vw, 0vh);}
+          25%  { transform: translate(17vw, 0vh);}
+          50%  { transform: translate(17vw, 7.5vh);}
+          75%  { transform: translate(-15vw, 7.5vh);}
+          100% { transform: translate(-15vw, 0vh);}
         }
         @keyframes animationPrioritizedEffect {
-          0%   { transform: translate(50vw, 50vh);}
-          25%  { transform: translate(50vw, 50vh);}
-          50%  { transform: translate(50vw, 50vh);}
-          100% { transform: translate(0px, 0vh);}
-          // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-          // 100% { transform: scale(1, 1); transform: rotate(1turn);}
+          0%   { transform: translate(19vw, 0vh);}
+          25%  { transform: translate(-19vw, 0vh);}
+          50%  { transform: translate(-19vw, -6.5vh);}
+          75%  { transform: translate(19vw, -6.5vh);}
+          100% { transform: translate(19vw, 0vh);}
+        }
+        @keyframes animationDotsEffect {
+          0%  { transform: rotate(0turn);}
+          100%  { transform: rotate(1turn);}
         }
 
 
