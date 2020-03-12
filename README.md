@@ -10,6 +10,10 @@
 
 This project was made as part of a capstone coding project for Noah Horwitz, a student at _[Epicodus](http://www.epicodus.com)_, a vocational school for technology careers based in Portland, OR. The project is designed to take a user's Google contacts, have the user assign important contacts with a desired interaction frequency, track their last interaction with each contact, sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list..
 
+|Prioritacts Example|
+|:---:|
+|![Prioritacts Example](https://raw.githubusercontent.com/nhhor/prioritacts/master/public/appExample.gif "Prioritacts Example")|
+
 > #### Project Proposal
 >
 > -   **Name of Student:** Noah Horwitz
