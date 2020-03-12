@@ -18,6 +18,7 @@ function ContactList(props) {
           <br/>
           <br/>
           <h3>Your</h3>
+          <br/>
           <h3>
           <div className='animationContacts'>contacts</div>
           <div className='animationDots'>...</div>
@@ -64,7 +65,7 @@ function ContactList(props) {
           animation: animationPrioritizedEffect 4s infinite;
         }
         .animationDots {
-          animation: animationDotsEffect 2s infinite;
+          animation: animationDotsEffect 1s infinite;
         }
 
         @keyframes animationContactsEffect {

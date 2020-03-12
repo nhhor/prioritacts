@@ -114,24 +114,23 @@ function Contact(props){
   }
 
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
+    console.log('userDefined', userDefined);
+    console.log('interactionType', interactionType);
+    console.log('redirect', redirect);
     let today = new Date();
-    console.log('userDefined: ', userDefined);
     let userDefinedUpdate = []
     if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
-        console.log('e.key:::', e.key);
         if (e.key == "~prioritacts~lastContact~") {
-          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
+          return
         } else {
-
           userDefinedUpdate.push(e);
-
         }
+          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
       });
     }
-    console.log('LOG userDefinedUpdate: ', userDefinedUpdate);
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
     if (interactionType === 'visit') {
