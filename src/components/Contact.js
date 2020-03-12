@@ -128,7 +128,7 @@ function Contact(props){
         } else {
           userDefinedUpdate.push(e);
         }
-          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
+        userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
       });
     }
     const { dispatch } = props;
@@ -146,7 +146,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
           </div>
 
           <div className='gridDiv2'>

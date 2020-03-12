@@ -65,7 +65,7 @@ function ContactList(props) {
           animation: animationPrioritizedEffect 4s infinite;
         }
         .animationDots {
-          animation: animationDotsEffect 1s infinite;
+          animation: animationDotsEffect .5s infinite;
         }
 
         @keyframes animationContactsEffect {
