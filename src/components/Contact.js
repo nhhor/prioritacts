@@ -55,7 +55,7 @@ function Contact(props){
       const finalResult = bResult.toFixed(0) * -1;
       let eventString;
       if ( finalResult < 0 ) {
-        eventString = `Upcoming event in ${finalResult*-1} days, on ${mostRecentEvent.date.month}/${mostRecentEvent.date.day}!`
+        eventString = `Upcoming event in ${finalResult*-1+1} days, on ${mostRecentEvent.date.month}/${mostRecentEvent.date.day}!`
       } else if ( finalResult === 0 ) {
         eventString = `Upcoming event today!`
       } else if ( finalResult < 365 ) {
@@ -112,20 +112,23 @@ function Contact(props){
     let x = document.getElementById(arg)
     x.style.display = x.style.display === 'none' ? 'block' : 'none';
   }
+
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
+    console.log('userDefined: ', userDefined);
     let userDefinedUpdate = []
     if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
-        if (e.key === '~prioritacts~lastContact~') {
-          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
-        } else {
+        if (e.key != '~prioritacts~lastContact~') {
           userDefinedUpdate.push(e)
+        } else {
+          userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
         }
       });
     }
+    console.log('LOG userDefinedUpdate: ', userDefinedUpdate);
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
     if (interactionType === 'visit') {
@@ -141,7 +144,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -292,28 +295,28 @@ function Contact(props){
           }
 
           .animationTest0 {
-            animation: div_animation_effect0 .25s 1;
+            animation: div_animation_effect0 1.25s 1;
           }
           .animationTest1 {
-            animation: div_animation_effect1 .5s 1;
+            animation: div_animation_effect1 1.5s 1;
           }
           .animationTest2 {
-            animation: div_animation_effect2 .75s 1;
+            animation: div_animation_effect2 1.75s 1;
           }
           .animationTest3 {
-            animation: div_animation_effect3 1s 1;
+            animation: div_animation_effect3 2s 1;
           }
           .animationTest4 {
-            animation: div_animation_effect4 1.25s 1;
+            animation: div_animation_effect4 2.25s 1;
           }
           .animationTest5 {
-            animation: div_animation_effect5 1.5s 1;
+            animation: div_animation_effect5 2.5s 1;
           }
           .animationTest6 {
-            animation: div_animation_effect6 1.75s 1;
+            animation: div_animation_effect6 2.75s 1;
           }
           .animationTest7 {
-            animation: div_animation_effect7 2s 1;
+            animation: div_animation_effect7 3s 1;
           }
 
           @keyframes div_animation_effect0 {

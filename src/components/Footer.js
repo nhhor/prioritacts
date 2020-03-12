@@ -5,7 +5,7 @@ function Footer(){
 
   return (
     <div className="inFooter">
-      <p className=""><Link to="/">All Contacts</Link> | Search _____ | <Link to="/Settings">Settings</Link></p>
+      <p className=""><Link to="/">All Contacts</Link> | <Link to="/Settings">Settings</Link></p>
       <style>{`
           .inFooter {
             padding-top: 10px;

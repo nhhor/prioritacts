@@ -7,7 +7,7 @@ function ContactList(props) {
   let asyncContacts = () => {
     if (typeof(props.contactList) == 'undefined') {
       console.log("Awaiting OAuth or contacts to load...")
-      return <h1>Hello!</h1>
+      return <h1><span><br/>Hello.<br/><br/><br/></span> Welcome to Prioritacts!</h1>
     } else {
       return props.contactList.map((contact, index) => <Contact
       name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
