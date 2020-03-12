@@ -146,7 +146,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -154,10 +154,16 @@ function Contact(props){
           </div>
 
           <div className='gridDiv3'>
-            <p>
-              <span className='contactUserDefined'>{userDefinedPriority()}</span>
-              <span className='settingsSpan'>{`<<`}</span>
-            </p>
+            <div>
+              <div className='contactUserDefined'>{userDefinedPriority()}</div>
+              <div className='settingsForm'>
+                <form>
+                  <input type='text' size='4'></input>
+                  <button>S</button>
+                </form>
+              </div>
+              <div className='settingsTrigger'>{`<<`}</div>
+            </div>
           </div>
 
           <div className='gridDiv4' id={'gridDiv4_' + props.id}>
@@ -280,10 +286,19 @@ function Contact(props){
             margin-right: 2%;
           }
 
-          .settingsSpan {
-            float: right;
+          .settingsTrigger {
+            position: absolute;
+            right: 5%;
+;
+          }
+          .settingsForm {
+            position: absolute;
+            right: 15%;
+            // width: 50px;
           }
           .contactUserDefined{
+            position: absolute;
+
             font-size: 0.75em;
           }
           .contactBirthday{
