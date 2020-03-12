@@ -121,10 +121,13 @@ function Contact(props){
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
-        if (e.key != '~prioritacts~lastContact~') {
-          userDefinedUpdate.push(e)
-        } else {
+        console.log('e.key:::', e.key);
+        if (e.key == "~prioritacts~lastContact~") {
           userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
+        } else {
+
+          userDefinedUpdate.push(e);
+
         }
       });
     }
@@ -144,7 +147,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -295,28 +298,28 @@ function Contact(props){
           }
 
           .animationTest0 {
-            animation: div_animation_effect0 1.25s 1;
+            animation: div_animation_effect0 0.25s 1;
           }
           .animationTest1 {
-            animation: div_animation_effect1 1.5s 1;
+            animation: div_animation_effect1 0.5s 1;
           }
           .animationTest2 {
-            animation: div_animation_effect2 1.75s 1;
+            animation: div_animation_effect2 0.75s 1;
           }
           .animationTest3 {
-            animation: div_animation_effect3 2s 1;
+            animation: div_animation_effect3 1s 1;
           }
           .animationTest4 {
-            animation: div_animation_effect4 2.25s 1;
+            animation: div_animation_effect4 1.25s 1;
           }
           .animationTest5 {
-            animation: div_animation_effect5 2.5s 1;
+            animation: div_animation_effect5 1.5s 1;
           }
           .animationTest6 {
-            animation: div_animation_effect6 2.75s 1;
+            animation: div_animation_effect6 1.75s 1;
           }
           .animationTest7 {
-            animation: div_animation_effect7 3s 1;
+            animation: div_animation_effect7 2s 1;
           }
 
           @keyframes div_animation_effect0 {

@@ -11,7 +11,6 @@ export const setToken = (token) => ({
 });
 
 export function fetchNewVisit(id, etag, userDefined, token) {
-  let json = 'test'
   return function (dispatch) {
     return fetch(`https://people.googleapis.com/v1/${id}:updateContact?access_token=${token}&updatePersonFields=userDefined&alt=json`, {
       method: 'PATCH',
