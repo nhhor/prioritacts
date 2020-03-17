@@ -2,9 +2,9 @@
 
 #### By Noah Horwitz
 
-<!-- ###### _First published 2020-02-14_ -->
+###### _First published 2020-03-12_
 
-<!-- The fully deployed project is hosted on GH-Pages [HERE](https://nhhor.github.io/prioritacts). -->
+The fully deployed project is hosted on netlify [HERE](https://focused-bose-eee02c.netlify.com).
 
 ## Description:
 
