@@ -2,8 +2,8 @@
 
 ### By Noah Horwitz
 ###### _First published 2020-03-12_
-##### The fully deployed project is hosted on netlify [HERE](https://prioritacts.netlify.com).
-
+##### The fully deployed project is hosted on [netlify](https://prioritacts.netlify.com).
+- [![Netlify Status](https://api.netlify.com/api/v1/badges/cbab0bb9-22ce-42bc-87ad-3326734d60f9/deploy-status)](https://app.netlify.com/sites/prioritacts/deploys)
 
 ## Description:
 
@@ -18,10 +18,11 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 -   Click the `Clone or download` button and copy the link provided.
 -   Open your terminal application (assuming GIT Scripts AND node.js (with NPM) have been installed on your system) and type `git clone (link)`.
 -   In the terminal using the `cd`... command, navigate to the newly created 'Prioritacts' repository folder and run `npm install`.
--   Also, while in the terminal's 'Prioritacts' directory, type `touch .env` this will create an environmental variable file which is used for securely storing two private credentials.
+-   Next, while in the terminal's 'Prioritacts' directory, type `touch .env` this will create an environmental variable file which is used for securely storing two private credentials.
   - Open the '.env' file in the editor of your chosing and add a line with `REACT_APP_API_KEY=` and than another line down with `REACT_APP_CLIENT_ID=`
   - To generate your own Google api key and client id, follow along with Google's walkthrough [here](https://console.developers.google.com/flows/enableapi?apiid=people.googleapis.com&credential=client_key).
   - Once you have your own credentials, add them to the the .env file (without quotes).
+  - You will also need to go to google console's Credentials > OAuth >  and add in 'Authorized JavaScript origins': `http://localhost:3000` & add in 'Authorized redirect URIs': `http://localhost:3000`.
 -   Then in the terminal, run `npm run start`.
 -   The app should then automatically open in a browser window.
 
