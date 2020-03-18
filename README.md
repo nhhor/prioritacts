@@ -6,8 +6,11 @@
 - [![Netlify Status](https://api.netlify.com/api/v1/badges/cbab0bb9-22ce-42bc-87ad-3326734d60f9/deploy-status)](https://app.netlify.com/sites/prioritacts/deploys)
 
 ## Description:
+This web app was made as part of a capstone coding project for Noah Horwitz, graduating student at _[Epicodus](http://www.epicodus.com)_, a vocational school for technology careers based in Portland, OR.
 
-This project was made as part of a capstone coding project for Noah Horwitz, a student at _[Epicodus](http://www.epicodus.com)_, a vocational school for technology careers based in Portland, OR. The project is designed to take a user's Google contacts, have the user be able to assign important contacts with a desired interaction frequency, track their last interaction(s) with each contact, and sort their contact list so contacts that have a high desired frequency but no last-interaction within that frequency are highlighted and moved to the top of the contact list.
+*Problem:* Your Google contacts are only ever sorted alphabetically, and knowing the last time you interacted with a contact is impossible at a glance, and inconvenient at best.
+
+**Solution:** A web-app that securely/seamlessly connects with your Google Contacts, allows a user to set a desired frequency which they wish to communicate with a contact, allows a user to log their most recent interaction, and then sort the user's contacts by priority since last interaction. *Welcome to Prioritacts, your Contacts ... Prioritized.*
 
 ## Demo:
 |Prioritacts Example Gif|
@@ -26,25 +29,28 @@ This project was made as part of a capstone coding project for Noah Horwitz, a s
 -   Then in the terminal, run `npm run start`.
 -   The app should then automatically open in a browser window.
 
-## Technology Stack:
+## Technology Used:
 
-- Front-end:
-  - `JavaScript`
-    - `React`
-    - `Redux`
-    - `OAuth` (see references)
-  - `HTML`
-  - `CSS`
-- Back-end:
-  - Goole's [People API](https://developers.google.com/people/v1/getting-started)
-    - (Data is hosted in an OAuth'ed user's individual contacts. Which means there is no storage or tracking outside of Google's own system.)
+- This project utilizes the **JAMstack** architecture:
+  - Front-end:
+    - `JavaScript`
+      - `React`
+      - `Redux`
+      - `OAuth` (see references)
+  - Back-end:
+    - `People API` hosted by [Google](https://developers.google.com/people/v1/getting-started).
+      - All user data is *only* displayed or updated within the Google People API ("Google Contacts") and contact/user data is **not** saved, sent, stored, or tracked in any way by this App.
+  - Markup:
+      - `HTML`
+      - `CSS`
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
   - `NPM`
   - `WebPack`
 - This project is deployed via [Netlify](https://www.netlify.com/).
 
 ## Known Bugs:
-- Netlify appears to have an *inconsistent* error where the contacts do not display after a successful login. Signing out of google.com and clearing the cookies and site data from Prioritacts seem to correct this.
+- Netlify appears to have an *inconsistent* error where the contacts do not display after a successful login. Signing out of google.com, closing extra browser tabs that are logged into a Google service, and clearing the cookies and site data from Prioritacts seem to correct this.
+- Google's OAuth header appears to have an *inconsistent* error where the the GoogleOAuth window fails to load. Reloading the page several times seems to temporarily correct this.
 
 ## React Component Tree:
 ![React Component Tree](https://raw.githubusercontent.com/nhhor/prioritacts/master/public/prioritacts-component-tree.png "Prioritacts React Component Tree")
