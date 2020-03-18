@@ -114,9 +114,6 @@ function Contact(props){
   }
 
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
-    console.log('userDefined', userDefined);
-    console.log('interactionType', interactionType);
-    console.log('redirect', redirect);
     let today = new Date();
     let userDefinedUpdate = []
     if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
@@ -140,13 +137,35 @@ function Contact(props){
     }
   }
 
+  let _priorityForm = null
+  function handleFormUpdate(event) {
+    event.preventDefault();
+    console.log('form ETAG', _priorityForm.attributes.etag.value);
+    console.log('form VALUE', _priorityForm.value);
+    console.log('form ID', _priorityForm.id);
+    console.log('TOKEN: ', props.token);
+
+
+
+
+
+    handleFormClick('settingsFormID_' + _priorityForm.id);
+    _priorityForm.value = null;
+  }
+
+  let handleFormClick = (arg) => {
+    let x = document.getElementById(arg)
+    x.style.display = x.style.display === 'none' ? 'block' : 'none';
+  }
+
+
   return (
     <div className={'contactSection ' + props.animationTest}>
       <div className='contactRow' id={'contactCell_' + props.id}>
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -156,13 +175,19 @@ function Contact(props){
           <div className='gridDiv3'>
             <div>
               <div className='contactUserDefined'>{userDefinedPriority()}</div>
-              <div className='settingsForm'>
-                <form>
-                  <input type='text' size='4'></input>
-                  <button>S</button>
+              <div className='settingsForm' id={'settingsFormID_' + props.id}>
+                <form onSubmit={handleFormUpdate}>
+                  <input
+                    type="number"
+                    id={props.id}
+                    etag={props.etag}
+                    name="priorityForm"
+                    placeholder='Add/Update Desired Frequency'
+                    ref={(input) => {_priorityForm = input;}}/>
+                  <button type='submit'>Submit</button>
                 </form>
               </div>
-              <div className='settingsTrigger'>{`<<`}</div>
+              <div className='settingsTrigger' onClick={() =>{handleFormClick('settingsFormID_' + props.id)}}>{`<<`}</div>
             </div>
           </div>
 
@@ -293,8 +318,9 @@ function Contact(props){
           }
           .settingsForm {
             position: absolute;
-            right: 15%;
+            right: 13%;
             // width: 50px;
+            display: none;
           }
           .contactUserDefined{
             position: absolute;
