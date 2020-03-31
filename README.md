@@ -51,6 +51,7 @@ This web app was made as part of a capstone coding project for Noah Horwitz, gra
 ## Known Bugs:
 - Netlify appears to have an *inconsistent* error where the contacts do not display after a successful login. Signing out of google.com, closing extra browser tabs that are logged into a Google service, and clearing the cookies and site data from Prioritacts seem to correct this.
 - Google's OAuth header appears to have an *inconsistent* error where the the GoogleOAuth window fails to load. Reloading the page several times seems to temporarily correct this.
+- Google apparently blocks 3rd party OAuth requests on the Firefox for Android browser.
 
 ## React Component Tree:
 ![React Component Tree](https://raw.githubusercontent.com/nhhor/prioritacts/master/public/prioritacts-component-tree.png "Prioritacts React Component Tree")

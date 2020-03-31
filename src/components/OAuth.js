@@ -34,7 +34,9 @@ class OAuth extends Component {
         apiKey: `${API_KEY}`,
         discoveryDocs: `${DISCOVERY_DOCS}`,
         client_id: `${CLIENT_ID}`,
-        scope: `${SCOPE}`
+        scope: `${SCOPE}`,
+        ux_mode: 'redirect',
+        redirect_uri: 'https://prioritacts.netlify.com/#/'
       });
 
       // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))

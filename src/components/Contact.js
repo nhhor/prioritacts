@@ -140,13 +140,21 @@ function Contact(props){
   let _priorityForm = null
   function handleFormUpdate(event) {
     event.preventDefault();
-    console.log('form ETAG', _priorityForm.attributes.etag.value);
-    console.log('form VALUE', _priorityForm.value);
-    console.log('form ID', _priorityForm.id);
+
+    let value = _priorityForm.value;
+
+    let id = _priorityForm.id;
+    let etag = _priorityForm.attributes.etag.value;
+    let userDefined = _priorityForm.attributes.userdefined;
+
+    console.log('form VALUE: ', value);
+
+    console.log('form ID: ', id);
+    console.log('form ETAG: ', etag);
+    console.log('form userDefined: ', userDefined);
     console.log('TOKEN: ', props.token);
 
-
-
+    console.log(userDefined);
 
 
     handleFormClick('settingsFormID_' + _priorityForm.id);
@@ -165,7 +173,7 @@ function Contact(props){
         <div className='gridParent'>
 
           <div className='gridDiv1' onClick={() =>{handleDetailClick('gridDiv4_' + props.id)}}>
-            <img className='contactPhoto' alt={`(p${props.index})`} id={props.photo}/>
+            <img className='contactPhoto' alt={`(p${props.index})`} src={props.photo}/>
           </div>
 
           <div className='gridDiv2'>
@@ -181,6 +189,7 @@ function Contact(props){
                     type="number"
                     id={props.id}
                     etag={props.etag}
+                    userdefined={props.userDefined}
                     name="priorityForm"
                     placeholder='Add/Update Desired Frequency'
                     ref={(input) => {_priorityForm = input;}}/>
