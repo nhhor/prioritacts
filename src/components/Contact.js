@@ -19,7 +19,7 @@ function Contact(props){
     } else {
       const today = new Date();
       const birthDate = new Date(today.getFullYear(), (bMonth-1), bDay+1)
-      if (today.getMonth() > (bMonth+1) && today.getdate() > bDay)
+      if (today.getMonth() > (bMonth+1) && today.getDate() > bDay)
       birthDate.setFullYear(birthDate.getFullYear() + 1)
       const bResult = Math.round(birthDate.getTime() - today.getTime()) / (86400000);
       const finalResult = bResult.toFixed(0);
