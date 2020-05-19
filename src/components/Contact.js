@@ -116,16 +116,17 @@ function Contact(props){
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
     let userDefinedUpdate = []
-    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
+    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
-        if (e.key == "~prioritacts~lastContact~") {
-          return
+        if (e.key === "~prioritacts~lastContact~") {
+          return false;
         } else {
           userDefinedUpdate.push(e);
         }
         userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
+        return false;
       });
     }
     const { dispatch } = props;
@@ -433,6 +434,4 @@ function Contact(props){
     );
   }
 
-  Contact = connect()(Contact);
-
-  export default Contact;
+  export default connect()(Contact);
