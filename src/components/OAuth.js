@@ -35,7 +35,7 @@ class OAuth extends Component {
       });
       // NEXT TWO ROWS WERE IN FUNC ABOVE:
       // ux_mode: 'redirect',
-      // redirect_uri: 'https://prioritacts.netlify.com/'
+      // redirect_uri: 'https://prioritacts.netlify.app/',
 
       this.auth2.then(() => {
         console.log("TRIGGER on init");
@@ -50,7 +50,8 @@ class OAuth extends Component {
       var opts = {
         width: 200,
         height: 50,
-        onsuccess: successCallback,
+        client_id: `${CLIENT_ID}`,
+        onsuccess: successCallback
       };
       gapi.signin2.render("loginButton", opts);
     });
@@ -115,13 +116,13 @@ class OAuth extends Component {
                 width: 100%;
                 background-color: red;
               }
-              #loginButton {
-                width: 200px;
-                // height: 60px;
-                border: none;
-                margin: 0px;
-                padding: 0px;
-              }
+              // #loginButton {
+              //   width: 200px;
+              //   // height: 60px;
+              //   border: none;
+              //   margin: 0px;
+              //   padding: 0px;
+              // }
 
 
               `}</style>
