@@ -8,7 +8,7 @@ function ContactList(props) {
     if (typeof(props.contactList) == 'undefined') {
       console.log("Awaiting OAuth or contacts to load...")
       return (
-        <div>
+        <div className="welcomeDiv">
           <br/>
           <h1>Hello.</h1>
           <br/>
@@ -20,12 +20,18 @@ function ContactList(props) {
           <h3>Your</h3>
           <br/>
           <h3>
-          <div className='animationContacts'>contacts</div>
-          <div className='animationDots'>...</div>
-          <div className='animationPrioritized'>prioritized</div>
+            <div className='animationContacts'>contacts</div>
+            <div className='animationDots'>...</div>
+            <div className='animationPrioritized'>prioritized</div>
           </h3>
+
+          <div className='prioritactsLogo'>
+
+          </div>
+
+
         </div>
-    )
+      )
     } else {
       return props.contactList.map((contact, index) => <Contact
       name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
@@ -46,52 +52,71 @@ function ContactList(props) {
 
   return (<div className="inContactList">
 
-    {asyncContacts()}
+  {asyncContacts()}
 
-    <style>
-      {
-        ` .inContactList {
-          // background: rgba(179,179,179,.03);
-          // background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.10) 1%, rgba(179,179,179,0.10) 99%, rgba(179,179,179,0.03) 100%);
-        }
-        .inContactList h1 {
-          margin: 0;
-        }
+  <style>
+    {
+      `
+      .welcomeDiv {
+        overflow: hidden;
+      }
 
-        .animationContacts {
-          animation: animationContactsEffect 4s infinite;
-        }
-        .animationPrioritized {
-          animation: animationPrioritizedEffect 4s infinite;
-        }
-        .animationDots {
-          animation: animationDotsEffect .5s infinite;
-        }
+      .prioritactsLogo {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -0%);
 
-        @keyframes animationContactsEffect {
-          0%   { transform: translate(-15vw, 0vh);}
-          25%  { transform: translate(17vw, 0vh);}
-          50%  { transform: translate(17vw, 7.5vh);}
-          75%  { transform: translate(-15vw, 7.5vh);}
-          100% { transform: translate(-15vw, 0vh);}
-        }
-        @keyframes animationPrioritizedEffect {
-          0%   { transform: translate(19vw, 0vh);}
-          25%  { transform: translate(-19vw, 0vh);}
-          50%  { transform: translate(-19vw, -6.5vh);}
-          75%  { transform: translate(19vw, -6.5vh);}
-          100% { transform: translate(19vw, 0vh);}
-        }
-        @keyframes animationDotsEffect {
-          0%  { transform: rotate(0turn);}
-          100%  { transform: rotate(1turn);}
-        }
+        background: url("PrioritactsSample_ByTailorBrands.png");
+        background-size: contain;
+        width: 128px;
+        height: 128px;
+      }
 
 
+      .inContactList {
+        // background: rgba(179,179,179,.03);
+        // background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.10) 1%, rgba(179,179,179,0.10) 99%, rgba(179,179,179,0.03) 100%);
+      }
 
-        `
-      }</style>
-  </div>);
+      .inContactList h1 {
+        margin: 0;
+      }
+
+      .animationContacts {
+        animation: animationContactsEffect 4s infinite;
+      }
+      .animationPrioritized {
+        animation: animationPrioritizedEffect 4s infinite;
+      }
+      .animationDots {
+        animation: animationDotsEffect .5s infinite;
+      }
+
+      @keyframes animationContactsEffect {
+        0%   { transform: translate(-13vw, 0vh);}
+        25%  { transform: translate(14vw, 0vh);}
+        50%  { transform: translate(14vw, 7.5vh);}
+        75%  { transform: translate(-13vw, 7.5vh);}
+        100% { transform: translate(-13vw, 0vh);}
+      }
+      @keyframes animationPrioritizedEffect {
+        0%   { transform: translate(15vw, 0vh);}
+        25%  { transform: translate(-15vw, 0vh);}
+        50%  { transform: translate(-15vw, -6.5vh);}
+        75%  { transform: translate(15vw, -6.5vh);}
+        100% { transform: translate(15vw, 0vh);}
+      }
+      @keyframes animationDotsEffect {
+        0%  { transform: rotate(0turn);}
+        100%  { transform: rotate(1turn);}
+      }
+
+
+
+      `
+    }
+  </style>
+</div>);
 }
 
 export default ContactList;
