@@ -3,6 +3,12 @@ import React from 'react';
 
 function Settings(props){
 
+  function signOut() {
+    const auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut().then(() => {
+    });
+  }
+
   return (
     <div className="inSettings">
       <h1>Settings!</h1>
@@ -25,12 +31,7 @@ function Settings(props){
       <h1>Settings!</h1>
       <h1>Settings!</h1>
       <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
+      <a href="/" onClick={signOut}>LOGOUT</a>
       <style>{`
           .inSettings {
             margin: 0;
