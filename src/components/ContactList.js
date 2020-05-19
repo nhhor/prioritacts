@@ -9,17 +9,10 @@ function ContactList(props) {
       console.log("Awaiting OAuth or contacts to load...")
       return (
         <div className="welcomeDiv">
-          <br/>
-          <h1>Hello.</h1>
-          <br/>
-          <br/>
-          <br/>
-          <h2>Welcome to Prioritacts!</h2>
-          <br/>
-          <br/>
-          <h3>Your</h3>
-          <br/>
-          <h3>
+          <h1 className="welcomeH1">Hello.</h1>
+          <h2 className="welcomeH2">Welcome to Prioritacts!</h2>
+          <h3 className="welcomeH3">
+            <div className="">Your</div>
             <div className='animationContacts'>contacts</div>
             <div className='animationDots'>...</div>
             <div className='animationPrioritized'>prioritized</div>
@@ -50,73 +43,91 @@ function ContactList(props) {
     }
   };
 
-  return (<div className="inContactList">
-
-  {asyncContacts()}
-
-  <style>
-    {
-      `
-      .welcomeDiv {
-        overflow: hidden;
-      }
-
-      .prioritactsLogo {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, -0%);
-
-        background: url("PrioritactsSample_ByTailorBrands.png");
-        background-size: contain;
-        width: 128px;
-        height: 128px;
-      }
+  return (
+    <div className="inContactList">
+      {asyncContacts()}
 
 
-      .inContactList {
-        // background: rgba(179,179,179,.03);
-        // background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.10) 1%, rgba(179,179,179,0.10) 99%, rgba(179,179,179,0.03) 100%);
-      }
+      <style>
+        {
+          `
+          .welcomeDiv {
+            height: 100%;
+            padding-top: 50px;
+            overflow: hidden;
+          }
 
-      .inContactList h1 {
-        margin: 0;
-      }
+          .welcomeH1 {
+            padding-top: 50px;
+            margin: 0px;
+          }
 
-      .animationContacts {
-        animation: animationContactsEffect 4s infinite;
-      }
-      .animationPrioritized {
-        animation: animationPrioritizedEffect 4s infinite;
-      }
-      .animationDots {
-        animation: animationDotsEffect .5s infinite;
-      }
+          .welcomeH2 {
+            padding-top: 50px;
+            margin: 0px;
+          }
 
-      @keyframes animationContactsEffect {
-        0%   { transform: translate(-13vw, 0vh);}
-        25%  { transform: translate(14vw, 0vh);}
-        50%  { transform: translate(14vw, 7.5vh);}
-        75%  { transform: translate(-13vw, 7.5vh);}
-        100% { transform: translate(-13vw, 0vh);}
-      }
-      @keyframes animationPrioritizedEffect {
-        0%   { transform: translate(15vw, 0vh);}
-        25%  { transform: translate(-15vw, 0vh);}
-        50%  { transform: translate(-15vw, -6.5vh);}
-        75%  { transform: translate(15vw, -6.5vh);}
-        100% { transform: translate(15vw, 0vh);}
-      }
-      @keyframes animationDotsEffect {
-        0%  { transform: rotate(0turn);}
-        100%  { transform: rotate(1turn);}
-      }
+          .welcomeH3 {
+            padding-top: 50px;
+            margin: 0px;
+          }
 
 
+          .prioritactsLogo {
+            margin-top: 50px;
 
-      `
-    }
-  </style>
-</div>);
-}
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -0%);
 
-export default ContactList;
+            background: url("PrioritactsSample_ByTailorBrands.png");
+            background-size: contain;
+            width: 128px;
+            height: 128px;
+          }
+
+
+          .inContactList {
+            // background: rgba(179,179,179,.03);
+            // background: linear-gradient(90deg, rgba(179,179,179,0.03) 0%, rgba(179,179,179,0.10) 1%, rgba(179,179,179,0.10) 99%, rgba(179,179,179,0.03) 100%);
+          }
+
+          .inContactList h1 {
+            margin: 0;
+          }
+
+          .animationContacts {
+            animation: animationContactsEffect 4s infinite;
+          }
+          .animationPrioritized {
+            animation: animationPrioritizedEffect 4s infinite;
+          }
+          .animationDots {
+            animation: animationDotsEffect .5s infinite;
+          }
+
+          @keyframes animationContactsEffect {
+            0%   { transform: translate(-75px, 0vh);}
+            25%  { transform: translate(75px, 0vh);}
+            50%  { transform: translate(75px, 50px);}
+            75%  { transform: translate(-75px, 50px);}
+            100% { transform: translate(-75px, 0vh);}
+          }
+          @keyframes animationPrioritizedEffect {
+            0%   { transform: translate(75px, 0vh);}
+            25%  { transform: translate(-75px, 0vh);}
+            50%  { transform: translate(-75px, -50px);}
+            75%  { transform: translate(75px, -50px);}
+            100% { transform: translate(75px, 0vh);}
+          }
+          @keyframes animationDotsEffect {
+            0%  { transform: rotate(0turn);}
+            100%  { transform: rotate(1turn);}
+          }
+          `
+        }
+      </style>
+    </div>);
+  }
+
+  export default ContactList;

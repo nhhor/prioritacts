@@ -141,22 +141,26 @@ function Contact(props){
   let _priorityForm = null
   function handleFormUpdate(event) {
     event.preventDefault();
-
     let value = _priorityForm.value;
-
     let id = _priorityForm.id;
     let etag = _priorityForm.attributes.etag.value;
-    let userDefined = _priorityForm.attributes.userdefined;
-
-    console.log('form VALUE: ', value);
-
-    console.log('form ID: ', id);
-    console.log('form ETAG: ', etag);
-    console.log('form userDefined: ', userDefined);
-    console.log('TOKEN: ', props.token);
-
-    console.log(userDefined);
-
+    let userDefined = props.userDefined;
+    let userDefinedUpdate = []
+    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
+      userDefinedUpdate.push({key: "~prioritacts~frequency~", value: `${value}`})
+    } else {
+      userDefined.map(function(e, index) {
+        if (e.key === "~prioritacts~frequency~") {
+          return false;
+        } else {
+          userDefinedUpdate.push(e);
+        }
+        userDefinedUpdate.push({key: "~prioritacts~frequency~", value: `${value}`})
+        return false;
+      });
+    }
+    const { dispatch } = props;
+    dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
 
     handleFormClick('settingsFormID_' + _priorityForm.id);
     _priorityForm.value = null;
