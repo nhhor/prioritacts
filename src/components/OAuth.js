@@ -5,27 +5,24 @@ import { connect } from 'react-redux';
 import { loadContacts, setToken } from "./../actions";
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-
 const API_KEY = process.env.REACT_APP_API_KEY;
-
+// Array of API discovery doc URLs for APIs used by the quickstart:
 const DISCOVERY_DOCS = "https://people.googleapis.com/$discovery/rest?version=v1";
-
+// Authorization scopes required by the API; multiple scopes can be included, separated by spaces:
 const SCOPE = "https://www.googleapis.com/auth/contacts";
 
 
 class OAuth extends Component {
+
   constructor(props) {
     super(props);
-    console.log('LOG FROM OAuth: super(props)', props)
-
     this.state = {
       isSignedIn: false,
       googleUser: "",
       err: null,
       access_token: null,
     };
-  }
-
+  };
 
   componentDidMount() {
     const successCallback = this.onSuccess.bind(this);
@@ -35,11 +32,10 @@ class OAuth extends Component {
         discoveryDocs: `${DISCOVERY_DOCS}`,
         client_id: `${CLIENT_ID}`,
         scope: `${SCOPE}`,
-        ux_mode: 'redirect',
-        redirect_uri: 'https://prioritacts.netlify.com'
       });
-
-      // this.auth2.attachClickHandler(document.querySelector('#loginButton'), {}, this.onLoginSuccessful.bind(this))
+      // NEXT TWO ROWS WERE IN FUNC ABOVE:
+      // ux_mode: 'redirect',
+      // redirect_uri: 'https://prioritacts.netlify.com/'
 
       this.auth2.then(() => {
         console.log("TRIGGER on init");
@@ -47,28 +43,27 @@ class OAuth extends Component {
           isSignedIn: this.auth2.isSignedIn.get()
         });
       });
+
     });
 
-    window.gapi.load("signin2", function() {
-      // Method 3: render a sign in button
-      // using this method will show Signed In if the user is already signed in
+    window.gapi.load("signin2", () => {
       var opts = {
         width: 200,
         height: 50,
-        client_id: `${CLIENT_ID}`,
-        onsuccess: successCallback
+        onsuccess: successCallback,
       };
       gapi.signin2.render("loginButton", opts);
     });
+
   }
 
   onSuccess(props) {
-    console.log(`TRIGGER on success.    🎩${this.auth2.currentUser.get().Qt.Ad}👠    now signed in.`);
+    console.log(`TRIGGER on success.    🎩${this.auth2.currentUser.get().getBasicProfile().getName()}👠    now signed in.`);
     this.setState({
       isSignedIn: true,
       err: null,
-      googleUser: this.auth2.currentUser.get().Qt.Ad,
-      access_token: this.auth2.currentUser.get().uc.access_token,
+      googleUser: this.auth2.currentUser.get().getBasicProfile().getName(),
+      access_token: this.auth2.currentUser.get().getAuthResponse().access_token,
     });
 
     const request = async () => {
@@ -81,7 +76,7 @@ class OAuth extends Component {
       const items = json.connections;
       dispatch(loadContacts(items));
 
-      const access_token = this.auth2.currentUser.get().uc.access_token
+      const access_token = this.auth2.currentUser.get().getAuthResponse().access_token
       dispatch(setToken(access_token));
     };
     request();
@@ -98,36 +93,49 @@ class OAuth extends Component {
     if (this.state.isSignedIn) {
       document.querySelector(".OAuthInline").style.display = "none";
       return <p>Hello {this.state.googleUser}, you are now signed in!</p>;
-    } else {
+      } else {
+        return (
+          <div>
+            <p>You are not signed in. Click here to sign in.</p>
+            <button id="loginButton">Login with Google</button>
+          </div>
+        );
+      }
+    }
+
+    render() {
       return (
-        <div>
-        <p>You are not signed in. Click here to sign in.</p>
-        <button id="loginButton">Login with Google</button>
-        </div>
-      );
+        <div className="OAuthInline">
+          {this.getContent()}
+          <style>{`
+              .OAuthInline {
+                position: fixed;
+                bottom: 0px;
+                z-index: 99;
+                width: 100%;
+                background-color: red;
+              }
+              #loginButton {
+                width: 200px;
+                // height: 60px;
+                border: none;
+                margin: 0px;
+                padding: 0px;
+              }
+
+
+              `}</style>
+          </div>
+        );
+      }
+    }
+
+    const mapStateToProps = (state) => {
+    return {
+      ...state
     }
   }
 
-  render() {
-    return (
-      <div className="OAuthInline">
-      {this.getContent()}
-      <style>{`
-        .OAuthInline {
-          position: fixed;
-          bottom: 0px;
-          z-index: 99;
-          width: 100%;
-          background-color: red;
-        }
+    OAuth = connect(mapStateToProps)(OAuth);
 
-
-        `}</style>
-        </div>
-      );
-    }
-  }
-
-  OAuth = connect()(OAuth);
-
-  export default OAuth;
+    export default OAuth;
