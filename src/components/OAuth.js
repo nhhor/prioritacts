@@ -50,8 +50,7 @@ class OAuth extends Component {
       var opts = {
         width: 200,
         height: 50,
-        client_id: `${CLIENT_ID}`,
-        onsuccess: successCallback
+        onsuccess: successCallback,
       };
       gapi.signin2.render("loginButton", opts);
     });
@@ -116,13 +115,13 @@ class OAuth extends Component {
                 width: 100%;
                 background-color: red;
               }
-              // #loginButton {
-              //   width: 200px;
-              //   // height: 60px;
-              //   border: none;
-              //   margin: 0px;
-              //   padding: 0px;
-              // }
+              #loginButton {
+                width: 200px;
+                // height: 60px;
+                border: none;
+                margin: 0px;
+                padding: 0px;
+              }
 
 
               `}</style>

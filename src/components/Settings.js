@@ -11,31 +11,19 @@ function Settings(props){
 
   return (
     <div className="inSettings">
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <h1>Settings!</h1>
-      <a href="/" onClick={signOut}>LOGOUT</a>
+      <h1><a href="/" onClick={signOut}>Sign Out</a></h1>
       <style>{`
           .inSettings {
-            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
             background-color: rgba(179, 179, 179, .66);
+            padding: 10%;
+            margin: 0;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px black;
           }
 
           .inSettings h1 {
