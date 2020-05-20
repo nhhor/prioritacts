@@ -129,10 +129,11 @@ function Contact(props){
         return false;
       });
     }
+
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
     if (interactionType === 'visit') {
-      return
+      return false;
     } else {
       window.open(redirect, '_blank')
     }
@@ -145,7 +146,6 @@ function Contact(props){
     let id = _priorityForm.id;
     let etag = _priorityForm.attributes.etag.value;
     let userDefined = props.userDefined;
-    console.log("userDefined", userDefined);
     let userDefinedUpdate = []
     if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~frequency~", value: `${value}`})
@@ -161,7 +161,6 @@ function Contact(props){
       });
     }
 
-    console.log("userDefinedUpdate", userDefinedUpdate)
 
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
