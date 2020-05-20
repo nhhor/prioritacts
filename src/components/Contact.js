@@ -116,7 +116,7 @@ function Contact(props){
   let handleInteractionClick = (id, etag, userDefined, interactionType, redirect) => {
     let today = new Date();
     let userDefinedUpdate = []
-    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
+    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~lastContact~", value: `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}-${interactionType}`})
     } else {
       userDefined.map(function(e, index) {
@@ -145,8 +145,9 @@ function Contact(props){
     let id = _priorityForm.id;
     let etag = _priorityForm.attributes.etag.value;
     let userDefined = props.userDefined;
+    console.log("userDefined", userDefined);
     let userDefinedUpdate = []
-    if (userDefined === [] || userDefined === undefined || userDefined === null || userDefined === '' ) {
+    if (userDefined == [] || userDefined == undefined || userDefined == null || userDefined == '' ) {
       userDefinedUpdate.push({key: "~prioritacts~frequency~", value: `${value}`})
     } else {
       userDefined.map(function(e, index) {
@@ -159,6 +160,9 @@ function Contact(props){
         return false;
       });
     }
+
+    console.log("userDefinedUpdate", userDefinedUpdate)
+
     const { dispatch } = props;
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
 
