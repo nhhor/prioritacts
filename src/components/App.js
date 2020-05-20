@@ -8,6 +8,7 @@ import ContactList from "./ContactList";
 import Settings from "./Settings";
 import Footer from "./Footer";
 import OAuth from "./OAuth";
+import Privacy from "./Privacy";
 
 
 class App extends React.Component {
@@ -29,9 +30,8 @@ class App extends React.Component {
             <Route exact path="/" render={() => (<ContactList contactList={this.props.contactsReducer.contacts}
             accessToken={this.props.tokenReducer.token}
                   />)} />
-          </Switch>
-          <Switch>
-            <Route path="/Settings" render={() => <Settings />} />
+                <Route path="/settings" render={() => <Settings />} />
+            <Route path="/privacy" render={() => <Privacy />} />
           </Switch>
         </div>
 
