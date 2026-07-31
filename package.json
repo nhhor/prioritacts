@@ -1,6 +1,6 @@
 {
   "name": "prioritacts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -10,17 +10,13 @@
     "react-dom": "^16.13.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "lint": "eslint src/**/*.js; exit 0",
-    "lint-fix": "eslint src/**/*.js --fix; exit 0",
-    "eject": "react-scripts eject"
+    "start": "vite --host 127.0.0.1 --port 3000 --strictPort",
+    "build": "vite build",
+    "serve": "vite preview --host 127.0.0.1 --port 4173 --strictPort"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.5",
+    "vite": "^8.2.0"
   }
 }

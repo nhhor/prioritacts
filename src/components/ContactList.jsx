@@ -1,45 +1,49 @@
-import React from 'react';
-import Contact from './Contact';
+import React from "react";
+import Contact from "./Contact";
 // import { Link } from 'react-router-dom';
 
 function ContactList(props) {
-
   let asyncContacts = () => {
-    if (typeof(props.contactList) == 'undefined') {
-      console.log("Awaiting OAuth or contacts to load...")
+    if (typeof props.contactList == "undefined") {
+      console.log("Awaiting OAuth or contacts to load...");
       return (
         <div className="welcomeDiv">
           <h1 className="welcomeH1">Hello.</h1>
           <h2 className="welcomeH2">Welcome to Prioritacts!</h2>
           <h3 className="welcomeH3">
             <div className="">Your</div>
-            <div className='animationContacts'>contacts</div>
-            <div className='animationDots'>...</div>
-            <div className='animationPrioritized'>prioritized</div>
+            <div className="animationContacts">contacts</div>
+            <div className="animationDots">...</div>
+            <div className="animationPrioritized">prioritized</div>
           </h3>
 
-          <div className='prioritactsLogo'>
-
-          </div>
-
-
+          <div className="prioritactsLogo"></div>
         </div>
-      )
+      );
     } else {
-      return props.contactList.map((contact, index) => <Contact
-      name={(contact.names[0].displayName ? contact.names[0].displayName : '')}
-      token={props.accessToken}
-      id={contact.resourceName}
-      etag={contact.etag}
-      animationTest={'animationTest'+index}
-      birthday={(contact.birthdays ? contact.birthdays[0].date : '')}
-      email={(contact.emailAddresses ? contact.emailAddresses[0].value : '')}
-      events={(contact.events ? contact.events : '')}
-      index={index}
-      phone={(contact.phoneNumbers ? contact.phoneNumbers[0].value : '')}
-      photo={(contact.photos ? (contact.photos[0].url+'?access_token='+props.accessToken) : '')}
-      userDefined={(contact.userDefined ? contact.userDefined : [])}
-      key={contact.resourceName}/>)
+      return props.contactList.map((contact, index) => (
+        <Contact
+          name={
+            contact.names[0].displayName ? contact.names[0].displayName : ""
+          }
+          token={props.accessToken}
+          id={contact.resourceName}
+          etag={contact.etag}
+          animationTest={"animationTest" + index}
+          birthday={contact.birthdays ? contact.birthdays[0].date : ""}
+          email={contact.emailAddresses ? contact.emailAddresses[0].value : ""}
+          events={contact.events ? contact.events : ""}
+          index={index}
+          phone={contact.phoneNumbers ? contact.phoneNumbers[0].value : ""}
+          photo={
+            contact.photos && contact.photos[0] && contact.photos[0].url
+              ? contact.photos[0].url
+              : ""
+          }
+          userDefined={contact.userDefined ? contact.userDefined : []}
+          key={contact.resourceName}
+        />
+      ));
     }
   };
 
@@ -47,10 +51,8 @@ function ContactList(props) {
     <div className="inContactList">
       {asyncContacts()}
 
-
       <style>
-        {
-          `
+        {`
           .welcomeDiv {
             height: 100%;
             padding-top: 50px;
@@ -124,10 +126,10 @@ function ContactList(props) {
             0%  { transform: rotate(0turn);}
             100%  { transform: rotate(1turn);}
           }
-          `
-        }
+          `}
       </style>
-    </div>);
-  }
+    </div>
+  );
+}
 
-  export default ContactList;
+export default ContactList;
