@@ -5,12 +5,12 @@ export default defineConfig({
   envPrefix: ["VITE_", "REACT_APP_"],
   plugins: [react()],
   server: {
-    host: "127.0.0.1",
+    host: "localhost",
     port: 3000,
     strictPort: true,
   },
   preview: {
-    host: "127.0.0.1",
+    host: "localhost",
     port: 4173,
     strictPort: true,
   },

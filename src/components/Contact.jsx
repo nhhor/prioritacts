@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchNewVisit } from "./../actions";
+import photoHelpers from "./contactPhoto";
 
 function Contact(props) {
   let animationTestNumberP = Math.floor(Math.random() * 101) + 75;
@@ -73,11 +74,7 @@ function Contact(props) {
   };
 
   let userDefinedPriority = () => {
-    if (
-      props.userDefined === "" ||
-      typeof props.userDefined === undefined ||
-      props.userDefined === []
-    ) {
+    if (!Array.isArray(props.userDefined) || props.userDefined.length === 0) {
       return;
     } else {
       const userDefinedFields = props.userDefined.map((x) => {
@@ -92,11 +89,7 @@ function Contact(props) {
   };
 
   let userDefinedLastInteraction = () => {
-    if (
-      props.userDefined === "" ||
-      typeof props.userDefined === undefined ||
-      props.userDefined === []
-    ) {
+    if (!Array.isArray(props.userDefined) || props.userDefined.length === 0) {
       return;
     } else {
       const userDefinedFields = props.userDefined.map((x) => {
@@ -235,22 +228,14 @@ function Contact(props) {
             <img
               className="contactPhoto"
               alt={`(p${props.index})`}
-              src={
-                props.photo ||
-                "data:image/svg+xml;charset=UTF-8," +
-                  encodeURIComponent(
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" rx="25" fill="#d9d9d9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="18" fill="#666">?</text></svg>',
-                  )
-              }
+              src={props.photo || photoHelpers.getFallbackAvatar(props.name)}
               loading="lazy"
               decoding="async"
               onError={(event) => {
                 event.currentTarget.onerror = null;
-                event.currentTarget.src =
-                  "data:image/svg+xml;charset=UTF-8," +
-                  encodeURIComponent(
-                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" rx="25" fill="#d9d9d9"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="18" fill="#666">?</text></svg>',
-                  );
+                event.currentTarget.src = photoHelpers.getFallbackAvatar(
+                  props.name,
+                );
               }}
             />
           </div>

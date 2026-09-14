@@ -1,22 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-function Settings(props){
-
+function Settings(props) {
   function signOut() {
-    const auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(() => {
-    });
+    if (window.google?.accounts?.id) {
+      window.google.accounts.id.disableAutoSelect();
+    }
   }
 
   return (
     <div className="inSettings">
-    <ul>
-      <li><h1><a href="/" onClick={signOut}>Sign Out</a></h1></li>
-      <li><h2><Link to="/privacy">Privacy Policy</Link></h2></li>
-    </ul>
+      <ul>
+        <li>
+          <h1>
+            <a href="/" onClick={signOut}>
+              Sign Out
+            </a>
+          </h1>
+        </li>
+        <li>
+          <h2>
+            <Link to="/privacy">Privacy Policy</Link>
+          </h2>
+        </li>
+      </ul>
 
-    <style>{`
+      <style>{`
           .inSettings {
             position: absolute;
             left: 50%;
@@ -35,8 +44,8 @@ function Settings(props){
             text-align: left;
           }
           `}</style>
-      </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default Settings;
+export default Settings;

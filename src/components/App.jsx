@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
 import "./../App.css";
 
@@ -10,14 +10,20 @@ import Footer from "./Footer";
 import OAuth from "./OAuth";
 import Privacy from "./Privacy";
 
-
 class App extends React.Component {
-
   simpleAction = (event) => {
-   this.props.loadContacts();
-  }
+    this.props.loadContacts();
+  };
 
   render() {
+    const contactList = Array.isArray(this.props.contactsReducer)
+      ? this.props.contactsReducer
+      : [];
+    const token =
+      typeof this.props.tokenReducer === "string"
+        ? this.props.tokenReducer
+        : "";
+
     return (
       <div className="App">
         <div className="OAuth">
@@ -25,12 +31,15 @@ class App extends React.Component {
         </div>
 
         <div className="appBody">
-
           <Switch>
-            <Route exact path="/" render={() => (<ContactList contactList={this.props.contactsReducer.contacts}
-            accessToken={this.props.tokenReducer.token}
-                  />)} />
-                <Route path="/settings" render={() => <Settings />} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <ContactList contactList={contactList} accessToken={token} />
+              )}
+            />
+            <Route path="/settings" render={() => <Settings />} />
             <Route path="/privacy" render={() => <Privacy />} />
           </Switch>
         </div>
@@ -39,40 +48,36 @@ class App extends React.Component {
           <Footer />
         </div>
 
-
         <style>{`
-            .OAuth {
-              position: fixed;
-              bottom: 0px;
-              z-index: 99;
-              width: 100%;
-              background-color: red;
-            }
+          .OAuth {
+            position: fixed;
+            bottom: 0px;
+            z-index: 99;
+            width: 100%;
+            background-color: red;
+          }
 
-            .appBody {
-              position: fixed;
-              overflow: auto;
-              top: 0px;
-              height: 93%;
-              width: 100%;
-            }
+          .appBody {
+            position: fixed;
+            overflow: auto;
+            top: 0px;
+            height: 93%;
+            width: 100%;
+          }
 
-            .appFooter {
-              position: fixed;
-              overflow: hidden;
-              bottom: 0px;
-              width: 100%;
-              height: 50px;
-            }
-
-            `}</style>
-        </div>
-      );
-    }
+          .appFooter {
+            position: fixed;
+            overflow: hidden;
+            bottom: 0px;
+            width: 100%;
+            height: 50px;
+          }
+        `}</style>
+      </div>
+    );
   }
+}
 
-  const mapStateToProps = state => ({
-   ...state
- });
+const mapStateToProps = (state) => ({ ...state });
 
 export default connect(mapStateToProps)(App);

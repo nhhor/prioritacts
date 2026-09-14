@@ -1,10 +1,12 @@
 import React from "react";
 import Contact from "./Contact";
+import photoHelpers from "./contactPhoto";
 // import { Link } from 'react-router-dom';
 
 function ContactList(props) {
+  const contactList = Array.isArray(props.contactList) ? props.contactList : [];
   let asyncContacts = () => {
-    if (typeof props.contactList == "undefined") {
+    if (contactList.length === 0) {
       console.log("Awaiting OAuth or contacts to load...");
       return (
         <div className="welcomeDiv">
@@ -21,7 +23,7 @@ function ContactList(props) {
         </div>
       );
     } else {
-      return props.contactList.map((contact, index) => (
+      return contactList.map((contact, index) => (
         <Contact
           name={
             contact.names[0].displayName ? contact.names[0].displayName : ""
@@ -35,11 +37,14 @@ function ContactList(props) {
           events={contact.events ? contact.events : ""}
           index={index}
           phone={contact.phoneNumbers ? contact.phoneNumbers[0].value : ""}
-          photo={
+          photo={photoHelpers.getContactPhotoUrl(
             contact.photos && contact.photos[0] && contact.photos[0].url
               ? contact.photos[0].url
-              : ""
-          }
+              : "",
+            contact.names && contact.names[0]
+              ? contact.names[0].displayName
+              : "",
+          )}
           userDefined={contact.userDefined ? contact.userDefined : []}
           key={contact.resourceName}
         />
