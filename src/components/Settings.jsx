@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 function Settings(props) {
   function signOut() {
-    if (window.google?.accounts?.id) {
-      window.google.accounts.id.disableAutoSelect();
-    }
+    window.localStorage.removeItem("prioritacts_google_access_token");
+    window.localStorage.removeItem("prioritacts_people_sync_token");
+    window.localStorage.removeItem("prioritacts_contacts");
   }
 
   return (

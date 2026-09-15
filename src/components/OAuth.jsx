@@ -1,16 +1,9 @@
-/* global gapi */
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadContacts, setToken } from "./../actions";
 
 const CLIENT_ID = import.meta.env.REACT_APP_CLIENT_ID;
-const API_KEY = import.meta.env.REACT_APP_API_KEY;
 const GOOGLE_GSI_INIT_KEY = "__prioritacts_google_gsi_init__";
-// Array of API discovery doc URLs for APIs used by the quickstart:
-const DISCOVERY_DOCS =
-  "https://people.googleapis.com/$discovery/rest?version=v1";
-// Authorization scopes required by the API; multiple scopes can be included, separated by spaces:
 const SCOPE = "https://www.googleapis.com/auth/contacts";
 const PEOPLE_SYNC_TOKEN_KEY = "prioritacts_people_sync_token";
 const GOOGLE_ACCESS_TOKEN_KEY = "prioritacts_google_access_token";
@@ -69,7 +62,7 @@ class OAuth extends Component {
       return;
     }
 
-    if (!window.google?.accounts?.id) {
+    if (!window.google?.accounts?.oauth2) {
       window.setTimeout(() => this.initializeGoogleClient(), 250);
       return;
     }
@@ -102,6 +95,7 @@ class OAuth extends Component {
           isSignedIn: true,
           err: null,
           access_token: accessToken,
+          googleUser: "Google user",
         });
 
         this.loadContacts(accessToken);
@@ -110,39 +104,11 @@ class OAuth extends Component {
 
     const loginButton = document.getElementById("loginButton");
     if (loginButton) {
-      window.google.accounts.id.initialize({
-        client_id: CLIENT_ID,
-        callback: (response) => {
-          if (!response.credential) {
-            this.setState({
-              isSignedIn: false,
-              err: "Google login did not return a credential.",
-            });
-            return;
-          }
-
-          const payload = JSON.parse(atob(response.credential.split(".")[1]));
-
-          this.setState({
-            isSignedIn: true,
-            err: null,
-            googleUser: payload.name || payload.given_name || "Google user",
-          });
-
-          if (this.tokenClient) {
-            this.tokenClient.requestAccessToken();
-          }
-        },
-      });
-
-      window.google.accounts.id.renderButton(loginButton, {
-        type: "standard",
-        theme: "outline",
-        size: "large",
-        text: "signin_with",
-        shape: "rectangular",
-        width: 200,
-      });
+      loginButton.onclick = () => {
+        if (this.tokenClient) {
+          this.tokenClient.requestAccessToken();
+        }
+      };
     }
   }
 
@@ -249,13 +215,6 @@ class OAuth extends Component {
         err: error.message,
       });
     }
-  }
-
-  onLoginFailed(err) {
-    this.setState({
-      isSignedIn: false,
-      err: err,
-    });
   }
 
   getContent() {
