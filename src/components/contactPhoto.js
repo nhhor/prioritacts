@@ -1,3 +1,7 @@
+const PHOTO_REQUEST_COOLDOWN_MS = 500;
+let lastPhotoRequestAt = 0;
+let lastPhotoRequestUrl = "";
+
 function getFallbackAvatar(displayName = "") {
   const initials =
     (displayName || "?")
@@ -17,23 +21,37 @@ function getFallbackAvatar(displayName = "") {
 }
 
 function getContactPhotoUrl(photoUrl, displayName = "") {
+  const fallbackUrl = getFallbackAvatar(displayName);
+
   if (!photoUrl || typeof photoUrl !== "string") {
-    return getFallbackAvatar(displayName);
+    return fallbackUrl;
   }
 
   const normalizedUrl = photoUrl.trim();
   if (!normalizedUrl) {
-    return getFallbackAvatar(displayName);
+    return fallbackUrl;
+  }
+
+  const now = Date.now();
+  if (
+    normalizedUrl === lastPhotoRequestUrl &&
+    now - lastPhotoRequestAt < PHOTO_REQUEST_COOLDOWN_MS
+  ) {
+    return lastPhotoRequestUrl;
   }
 
   if (
     normalizedUrl.startsWith("data:image/") ||
     /^https?:\/\//i.test(normalizedUrl)
   ) {
+    lastPhotoRequestUrl = normalizedUrl;
+    lastPhotoRequestAt = now;
     return normalizedUrl;
   }
 
-  return getFallbackAvatar(displayName);
+  lastPhotoRequestUrl = fallbackUrl;
+  lastPhotoRequestAt = now;
+  return fallbackUrl;
 }
 
 export { getContactPhotoUrl, getFallbackAvatar };
