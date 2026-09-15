@@ -227,12 +227,12 @@ class OAuth extends Component {
     }
 
     return (
-      <div>
-        <p>You are not signed in. Click here to sign in.</p>
+      <>
+        <p>You are not signed in:</p>
         <button id="loginButton" type="button">
           Login with Google
         </button>
-      </div>
+      </>
     );
   }
 
@@ -249,11 +249,23 @@ class OAuth extends Component {
                 width: 100%;
                 background-color: red;
               }
+
+              p {
+                margin: 8px;
+              }
+
               #loginButton {
                 width: 200px;
                 border: none;
-                margin: 0px;
-                padding: 0px;
+                margin: 8px 0px 16px 0px;
+                padding: 8px;
+                border-radius: 8px;
+                background-color: #4285f4;
+                color: white;
+                font-size: 1rem;
+                cursor: pointer;
+                box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.33);
+                font-weight: bold;
               }
               `}</style>
       </div>
