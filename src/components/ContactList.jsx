@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Contact from "./Contact";
 import photoHelpers from "./contactPhoto";
-// import { Link } from 'react-router-dom';
 
 function ContactList(props) {
   const contactList = Array.isArray(props.contactList) ? props.contactList : [];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+  React.useEffect(() => {
+    setIsSearching(true);
+
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+      setIsSearching(false);
+    }, 666);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  const filteredContactList = contactList.filter((contact) => {
+    const displayName =
+      contact.names && contact.names[0] && contact.names[0].displayName
+        ? contact.names[0].displayName
+        : "";
+
+    return displayName
+      .toLowerCase()
+      .includes(debouncedSearchTerm.toLowerCase());
+  });
+
   let asyncContacts = () => {
     if (contactList.length === 0) {
       console.log("Awaiting OAuth or contacts to load...");
@@ -23,32 +48,59 @@ function ContactList(props) {
         </div>
       );
     } else {
-      return contactList.map((contact, index) => (
-        <Contact
-          name={
-            contact.names[0].displayName ? contact.names[0].displayName : ""
-          }
-          token={props.accessToken}
-          id={contact.resourceName}
-          etag={contact.etag}
-          animationTest={"animationTest" + index}
-          birthday={contact.birthdays ? contact.birthdays[0].date : ""}
-          email={contact.emailAddresses ? contact.emailAddresses[0].value : ""}
-          events={contact.events ? contact.events : ""}
-          index={index}
-          phone={contact.phoneNumbers ? contact.phoneNumbers[0].value : ""}
-          photo={photoHelpers.getContactPhotoUrl(
-            contact.photos && contact.photos[0] && contact.photos[0].url
-              ? contact.photos[0].url
-              : "",
-            contact.names && contact.names[0]
-              ? contact.names[0].displayName
-              : "",
+      return (
+        <>
+          <div className="searchDiv">
+            <span className="search">
+              <input
+                type="text"
+                placeholder="Search contacts..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </span>
+            {isSearching ? (
+              <span className="searching">Searching...</span>
+            ) : null}
+          </div>
+          {filteredContactList.length === 0 && !isSearching ? (
+            <div className="noMatches">No matches found.</div>
+          ) : (
+            filteredContactList.map((contact, index) => (
+              <Contact
+                name={
+                  contact.names[0].displayName
+                    ? contact.names[0].displayName
+                    : ""
+                }
+                token={props.accessToken}
+                id={contact.resourceName}
+                etag={contact.etag}
+                animationTest={"animationTest" + index}
+                birthday={contact.birthdays ? contact.birthdays[0].date : ""}
+                email={
+                  contact.emailAddresses ? contact.emailAddresses[0].value : ""
+                }
+                events={contact.events ? contact.events : ""}
+                index={index}
+                phone={
+                  contact.phoneNumbers ? contact.phoneNumbers[0].value : ""
+                }
+                photo={photoHelpers.getContactPhotoUrl(
+                  contact.photos && contact.photos[0] && contact.photos[0].url
+                    ? contact.photos[0].url
+                    : "",
+                  contact.names && contact.names[0]
+                    ? contact.names[0].displayName
+                    : "",
+                )}
+                userDefined={contact.userDefined ? contact.userDefined : []}
+                key={contact.resourceName}
+              />
+            ))
           )}
-          userDefined={contact.userDefined ? contact.userDefined : []}
-          key={contact.resourceName}
-        />
-      ));
+        </>
+      );
     }
   };
 
@@ -101,6 +153,27 @@ function ContactList(props) {
 
           .inContactList h1 {
             margin: 0;
+          }
+
+          .noMatches {
+            padding: 16px;
+            color: #666;
+            text-align: center;
+            font-size: 0.95rem;
+          }
+
+          .searchDiv {
+            position: relative;
+            padding: 8px;
+          }
+
+          .searching {
+            padding: 8px 16px;
+            color: #666;
+            font-size: 0.85rem;
+            text-align: center;
+            position: absolute;
+            left: 0px;
           }
 
           .animationContacts {
