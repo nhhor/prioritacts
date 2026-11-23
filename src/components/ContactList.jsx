@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import Contact from "./Contact";
 import photoHelpers from "./contactPhoto";
 
+// Google People API omits fields (names, photos, etc.) that a contact lacks,
+// so safely read the first entry of an optional array field.
+const first = (arr) => (Array.isArray(arr) && arr.length > 0 ? arr[0] : undefined);
+const getDisplayName = (contact) => first(contact.names)?.displayName || "";
+
 function ContactList(props) {
   const contactList = Array.isArray(props.contactList) ? props.contactList : [];
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,12 +25,7 @@ function ContactList(props) {
   }, [searchTerm]);
 
   const filteredContactList = contactList.filter((contact) => {
-    const displayName =
-      contact.names && contact.names[0] && contact.names[0].displayName
-        ? contact.names[0].displayName
-        : "";
-
-    return displayName
+    return getDisplayName(contact)
       .toLowerCase()
       .includes(debouncedSearchTerm.toLowerCase());
   });
@@ -68,31 +68,19 @@ function ContactList(props) {
           ) : (
             filteredContactList.map((contact, index) => (
               <Contact
-                name={
-                  contact.names[0].displayName
-                    ? contact.names[0].displayName
-                    : ""
-                }
+                name={getDisplayName(contact)}
                 token={props.accessToken}
                 id={contact.resourceName}
                 etag={contact.etag}
                 animationTest={"animationTest" + index}
-                birthday={contact.birthdays ? contact.birthdays[0].date : ""}
-                email={
-                  contact.emailAddresses ? contact.emailAddresses[0].value : ""
-                }
+                birthday={first(contact.birthdays)?.date || ""}
+                email={first(contact.emailAddresses)?.value || ""}
                 events={contact.events ? contact.events : ""}
                 index={index}
-                phone={
-                  contact.phoneNumbers ? contact.phoneNumbers[0].value : ""
-                }
+                phone={first(contact.phoneNumbers)?.value || ""}
                 photo={photoHelpers.getContactPhotoUrl(
-                  contact.photos && contact.photos[0] && contact.photos[0].url
-                    ? contact.photos[0].url
-                    : "",
-                  contact.names && contact.names[0]
-                    ? contact.names[0].displayName
-                    : "",
+                  first(contact.photos)?.url || "",
+                  getDisplayName(contact),
                 )}
                 userDefined={contact.userDefined ? contact.userDefined : []}
                 key={contact.resourceName}
