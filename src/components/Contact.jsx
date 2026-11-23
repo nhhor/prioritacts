@@ -212,7 +212,8 @@ function Contact(props) {
 
   let handleFormClick = (arg) => {
     let x = document.getElementById(arg);
-    x.style.display = x.style.display === "none" ? "block" : "none";
+    const isHidden = window.getComputedStyle(x).display === "none";
+    x.style.display = isHidden ? "block" : "none";
   };
 
   return (
@@ -412,6 +413,7 @@ function Contact(props) {
             border-radius: 25px;
             font-weight: bolder;
             min-width: 50px;
+            cursor: pointer;
           }
 
           .buttonText {
@@ -419,6 +421,7 @@ function Contact(props) {
             border-radius: 25px;
             font-weight: bolder;
             min-width: 50px;
+            cursor: pointer;
           }
 
           .buttonPhone {
@@ -426,6 +429,7 @@ function Contact(props) {
             border-radius: 25px;
             font-weight: bolder;
             min-width: 50px;
+            cursor: pointer;
           }
 
           .buttonVisit {
@@ -433,6 +437,7 @@ function Contact(props) {
             border-radius: 25px;
             font-weight: bolder;
             min-width: 50px;
+            cursor: pointer;
           }
 
           .priorityDiv {

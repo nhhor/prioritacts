@@ -4,7 +4,8 @@ import photoHelpers from "./contactPhoto";
 
 // Google People API omits fields (names, photos, etc.) that a contact lacks,
 // so safely read the first entry of an optional array field.
-const first = (arr) => (Array.isArray(arr) && arr.length > 0 ? arr[0] : undefined);
+const first = (arr) =>
+  Array.isArray(arr) && arr.length > 0 ? arr[0] : undefined;
 const getDisplayName = (contact) => first(contact.names)?.displayName || "";
 
 function ContactList(props) {
@@ -51,14 +52,20 @@ function ContactList(props) {
       return (
         <>
           <div className="searchDiv">
-            <span className="search">
-              <input
-                type="text"
-                placeholder="Search contacts..."
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-              />
-            </span>
+            <input
+              type="text"
+              placeholder="Search contacts..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+            />
+            <button
+              type="button"
+              className="clearSearch"
+              aria-label="Clear search"
+              onClick={() => setSearchTerm("")}
+            >
+              X
+            </button>
             {isSearching ? (
               <span className="searching">Searching...</span>
             ) : null}
@@ -153,6 +160,19 @@ function ContactList(props) {
           .searchDiv {
             position: relative;
             padding: 8px;
+          }
+
+          .clearSearch {
+            position: relative;
+            right: 22px;
+            background: transparent;
+            // border: none;
+            border-radius: 50%;
+            border-color: rgba(179, 179, 179, 0.1);
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #999;
           }
 
           .searching {
