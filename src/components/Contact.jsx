@@ -2,11 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchNewVisit } from "./../actions";
 import photoHelpers from "./contactPhoto";
+import "./Contact.css";
 
 function Contact(props) {
-  let animationTestNumberP = Math.floor(Math.random() * 101) + 75;
-  let animationTestNumberN = Math.floor(Math.random() * 101) - 125;
-
   let birthday = () => {
     const bYear = [props.birthday].map((e) => e.year)[0];
     const bMonth = [props.birthday].map((e) => e.month)[0];
@@ -73,21 +71,6 @@ function Contact(props) {
     }
   };
 
-  let userDefinedPriority = () => {
-    if (!Array.isArray(props.userDefined) || props.userDefined.length === 0) {
-      return;
-    } else {
-      const userDefinedFields = props.userDefined.map((x) => {
-        if (x.key === "~prioritacts~frequency~") {
-          return ` Priority set to ${x.value}`;
-        } else {
-          return "";
-        }
-      });
-      return userDefinedFields;
-    }
-  };
-
   let userDefinedLastInteraction = () => {
     if (!Array.isArray(props.userDefined) || props.userDefined.length === 0) {
       return;
@@ -122,7 +105,8 @@ function Contact(props) {
 
   let handleDetailClick = (arg) => {
     let x = document.getElementById(arg);
-    x.style.display = x.style.display === "none" ? "block" : "none";
+    if (!x) return;
+    x.style.display = x.style.display === "none" ? "" : "none";
   };
 
   let handleInteractionClick = (
@@ -255,360 +239,215 @@ function Contact(props) {
 
   let handleFormClick = (arg) => {
     let x = document.getElementById(arg);
+    if (!x) return;
     const isHidden = window.getComputedStyle(x).display === "none";
     x.style.display = isHidden ? "block" : "none";
   };
 
+  const priorityValue = Array.isArray(props.userDefined)
+    ? props.userDefined.find((x) => x.key === "~prioritacts~frequency~")
+        ?.value
+    : undefined;
+  const birthdayText = birthday();
+  const lastInteractionText = (userDefinedLastInteraction() || [])
+    .join("")
+    .trim();
+  const eventText = events();
+  const hasDetails = Boolean(birthdayText || lastInteractionText || eventText);
+
   return (
-    <div className={"contactSection " + props.animationTest}>
+    <article
+      className="contactSection"
+      style={{ animationDelay: `${Math.min(props.index, 12) * 35}ms` }}
+    >
       <div className="contactRow" id={"contactCell_" + props.id}>
-        <div className="gridParent">
-          <div
-            className="gridDiv1"
-            onClick={() => {
-              handleDetailClick("gridDiv4_" + props.id);
+        <button
+          type="button"
+          className="contactAvatar"
+          aria-label={`Toggle details for ${props.name}`}
+          onClick={() => {
+            handleDetailClick("gridDiv4_" + props.id);
+          }}
+        >
+          <img
+            className="contactPhoto"
+            alt=""
+            src={props.photo || photoHelpers.getFallbackAvatar(props.name)}
+            loading="lazy"
+            decoding="async"
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = photoHelpers.getFallbackAvatar(
+                props.name,
+              );
             }}
-          >
-            <img
-              className="contactPhoto"
-              alt={`(p${props.index})`}
-              src={props.photo || photoHelpers.getFallbackAvatar(props.name)}
-              loading="lazy"
-              decoding="async"
-              onError={(event) => {
-                event.currentTarget.onerror = null;
-                event.currentTarget.src = photoHelpers.getFallbackAvatar(
-                  props.name,
-                );
+          />
+        </button>
+
+        <div className="contactInfo">
+          <span className="contactName">{props.name || "Unnamed contact"}</span>
+          <div className="priorityDiv">
+            <button
+              type="button"
+              className="priorityTrigger"
+              aria-label="Edit priority"
+              title="Edit priority"
+              onClick={() => {
+                handleFormClick("settingsFormID_" + props.id);
               }}
-            />
-          </div>
-
-          <div className="gridDiv2">
-            <span className="contactName">{props.name}</span>
-          </div>
-
-          <div className="gridDiv3">
-            <div className="priorityDiv">
-              <span
-                className="priorityTrigger"
-                onClick={() => {
-                  handleFormClick("settingsFormID_" + props.id);
-                }}
-              >{`✏️`}</span>
-              <span className="contactUserDefined">
-                {userDefinedPriority()}
-              </span>
-              <div className="settingsForm" id={"settingsFormID_" + props.id}>
-                <form onSubmit={handleFormUpdate}>
-                  <input
-                    type="number"
-                    id={props.id}
-                    etag={props.etag}
-                    userdefined={props.userDefined}
-                    name="priorityForm"
-                    placeholder="Desired Frequency"
-                    ref={(input) => {
-                      _priorityForm = input;
-                    }}
-                  />
-                  <button type="submit">Update</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div className="gridDiv5" id={"gridDiv5_" + props.id}>
-            <div className="communicateRow">
-              <span className="contactMethod">
-                <button
-                  className="buttonEMail"
-                  onClick={() => {
-                    handleInteractionClick(
-                      props.id,
-                      props.etag,
-                      props.userDefined,
-                      "email",
-                      `https://mail.google.com/mail/?view=cm&fs=1&to=${props.email}&body=%0A%0A%0A~This message was created with the Prioritacts App!~`,
-                    );
-                  }}
-                >
-                  Email
-                </button>
-              </span>
-              <span className="contactMethod">
-                <button
-                  className="buttonText"
-                  onClick={() => {
-                    handleInteractionClick(
-                      props.id,
-                      props.etag,
-                      props.userDefined,
-                      "text",
-                      `sms:${props.phone}`,
-                    );
-                  }}
-                >
-                  Text
-                </button>
-              </span>
-              <span className="contactMethod">
-                <button
-                  className="buttonPhone"
-                  onClick={() => {
-                    handleInteractionClick(
-                      props.id,
-                      props.etag,
-                      props.userDefined,
-                      "call",
-                      `tel:${props.phone}`,
-                    );
-                  }}
-                >
-                  Call
-                </button>
-              </span>
-              <span className="contactMethod visitMethod">
-                <button className="buttonVisit" onClick={handleVisitClick}>
-                  Visit
-                </button>
-                <input
-                  type="date"
-                  className="visitDateInput"
-                  aria-label="Visit date"
-                  tabIndex={-1}
-                  max={todayInputValue}
-                  defaultValue=""
-                  ref={visitDateInput}
-                  onChange={handleVisitDateChange}
-                />
-              </span>
-            </div>
-          </div>
-          <div className="gridDiv4" id={"gridDiv4_" + props.id}>
-            <p className="contactBirthday">{birthday()}</p>
-            <p className="contactLastInteraction">
-              {userDefinedLastInteraction()}
-            </p>
-            <p className="contactEvent">{events()}</p>
+            >
+              <Icon name="edit" />
+              {priorityValue ? (
+                <span className="contactUserDefined">
+                  Priority <strong>{priorityValue}</strong>
+                </span>
+              ) : (
+                <span className="contactUserDefined isEmpty">Set priority</span>
+              )}
+            </button>
           </div>
         </div>
+
+        <div className="communicateRow" id={"gridDiv5_" + props.id}>
+          <button
+            type="button"
+            className="actionBtn buttonEMail"
+            disabled={!props.email}
+            onClick={() => {
+              handleInteractionClick(
+                props.id,
+                props.etag,
+                props.userDefined,
+                "email",
+                `https://mail.google.com/mail/?view=cm&fs=1&to=${props.email}&body=%0A%0A%0A~This message was created with the Prioritacts App!~`,
+              );
+            }}
+          >
+            <Icon name="email" />
+            <span>Email</span>
+          </button>
+          <button
+            type="button"
+            className="actionBtn buttonText"
+            disabled={!props.phone}
+            onClick={() => {
+              handleInteractionClick(
+                props.id,
+                props.etag,
+                props.userDefined,
+                "text",
+                `sms:${props.phone}`,
+              );
+            }}
+          >
+            <Icon name="text" />
+            <span>Text</span>
+          </button>
+          <button
+            type="button"
+            className="actionBtn buttonPhone"
+            disabled={!props.phone}
+            onClick={() => {
+              handleInteractionClick(
+                props.id,
+                props.etag,
+                props.userDefined,
+                "call",
+                `tel:${props.phone}`,
+              );
+            }}
+          >
+            <Icon name="call" />
+            <span>Call</span>
+          </button>
+          <span className="visitMethod">
+            <button
+              type="button"
+              className="actionBtn buttonVisit"
+              onClick={handleVisitClick}
+            >
+              <Icon name="visit" />
+              <span>Visit</span>
+            </button>
+            <input
+              type="date"
+              className="visitDateInput"
+              aria-label="Visit date"
+              tabIndex={-1}
+              max={todayInputValue}
+              defaultValue=""
+              ref={visitDateInput}
+              onChange={handleVisitDateChange}
+            />
+          </span>
+        </div>
       </div>
-      <style>{`
 
-          .gridParent {
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            grid-template-rows: 1fr repeat(2, .5fr);
-            grid-column-gap: 3px;
-            grid-row-gap: 3px;
-          }
+      <div className="settingsForm" id={"settingsFormID_" + props.id}>
+        <form onSubmit={handleFormUpdate}>
+          <input
+            type="number"
+            id={props.id}
+            etag={props.etag}
+            userdefined={props.userDefined}
+            name="priorityForm"
+            placeholder="Desired frequency"
+            aria-label="Desired frequency"
+            ref={(input) => {
+              _priorityForm = input;
+            }}
+          />
+          <button type="submit" className="btn btn-primary">
+            Update
+          </button>
+        </form>
+      </div>
 
-          .gridDiv1 { grid-area: 1 / 1 / 2 / 2; justify-content: left; align-items: center; display: flex;}
-          .gridDiv2 { grid-area: 1 / 2 / 2 / 8; justify-content: left; align-items: center; display: flex;}
-          .gridDiv3 { grid-area: 2 / 1 / 3 / 8; justify-content: left; align-items: center; display: flex;}
-          .gridDiv4 { grid-area: 3 / 1 / 4 / 8;}
-          .gridDiv5 { grid-area: 1 / 8 / 4 / 10; justify-content: center; align-items: center; display: flex;}
+      {hasDetails ? (
+        <div className="contactDetails" id={"gridDiv4_" + props.id}>
+          {birthdayText ? (
+            <p className="contactBirthday">
+              <Icon name="cake" />
+              {birthdayText}
+            </p>
+          ) : null}
+          {lastInteractionText ? (
+            <p className="contactLastInteraction">
+              <Icon name="clock" />
+              {lastInteractionText}
+            </p>
+          ) : null}
+          {eventText ? (
+            <p className="contactEvent">
+              <Icon name="calendar" />
+              {eventText}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+    </article>
+  );
+}
 
-          .contactSection {
-            width: 96%;
-            margin-right: 2%;
-            margin-left: 2%;
-          }
+const ICON_PATHS = {
+  edit: "M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z",
+  email:
+    "M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm18 2-10 7L2 6",
+  text: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z",
+  call: "M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z",
+  visit:
+    "M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z",
+  cake: "M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1M2 21h20M7 8v3M12 8v3M17 8v3M7 4h.01M12 4h.01M17 4h.01",
+  clock: "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM12 6v6l4 2",
+  calendar:
+    "M8 2v4M16 2v4M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM3 10h18",
+};
 
-          .contactRow {
-            background: rgba(179,179,179,.03);
-            text-align: left;
-            border-radius: 10px;
-            box-shadow: 3px 1px 2px rgba(0, 0, 100, .33);
-            padding-left: 5%;
-            padding-top: 9px;
-            padding-bottom: 6px;
-          }
-
-          .contactRow p {
-            margin: 0px;
-          }
-
-          .contactPhoto {
-            width: 50px;
-            height: 50px;
-            border-radius: 50px;
-            border: 1px solid grey;
-          }
-
-          .communicateRow {
-            height: 100%;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between;
-            align-items: center;
-            align-content: space-around;
-
-          }
-
-          .contactMethod {
-            padding: 1px;
-          }
-
-          .buttonEMail {
-            background-color: rgba(255,0,0,.1);
-            border-radius: 25px;
-            font-weight: bolder;
-            min-width: 50px;
-            cursor: pointer;
-          }
-
-          .buttonText {
-            background-color: rgba(255,255,0,.1);
-            border-radius: 25px;
-            font-weight: bolder;
-            min-width: 50px;
-            cursor: pointer;
-          }
-
-          .buttonPhone {
-            background-color: rgba(0,255,0,.1);
-            border-radius: 25px;
-            font-weight: bolder;
-            min-width: 50px;
-            cursor: pointer;
-          }
-
-          .buttonVisit {
-            background-color: rgba(0,0,255,.1);
-            border-radius: 25px;
-            font-weight: bolder;
-            min-width: 50px;
-            cursor: pointer;
-          }
-
-          .visitMethod {
-            position: relative;
-          }
-          .visitDateInput {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 0;
-            padding: 0;
-            border: 0;
-            opacity: 0;
-            pointer-events: none;
-          }
-
-          .priorityDiv {
-            margin-left: 15%;
-          }
-          .priorityTrigger {
-            background-color: rgba(0,0,255,.05);
-            border-radius: 25px;
-            padding: 5px 5px 5px 3px;
-            cursor: pointer;
-          }
-          .settingsForm {
-            position: absolute;
-            left: 6%;
-            display: none;
-          }
-          .contactUserDefined{
-            font-style: italic;
-            font-size: 0.75em;
-          }
-          .contactBirthday{
-            font-weight: bolder;
-          }
-          .contactEvent{
-            font-size: 0.75em;
-          }
-          .contactLastInteraction{
-            font-size: 0.75em;
-          }
-
-          .animationTest0 {
-            animation: div_animation_effect0 0.25s 1;
-          }
-          .animationTest1 {
-            animation: div_animation_effect1 0.5s 1;
-          }
-          .animationTest2 {
-            animation: div_animation_effect2 0.75s 1;
-          }
-          .animationTest3 {
-            animation: div_animation_effect3 1s 1;
-          }
-          .animationTest4 {
-            animation: div_animation_effect4 1.25s 1;
-          }
-          .animationTest5 {
-            animation: div_animation_effect5 1.5s 1;
-          }
-          .animationTest6 {
-            animation: div_animation_effect6 1.75s 1;
-          }
-          .animationTest7 {
-            animation: div_animation_effect7 2s 1;
-          }
-
-          @keyframes div_animation_effect0 {
-            0%   { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            50%  { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect1 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect2 {
-            0%   { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect3 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect4 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect5 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect6 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-          @keyframes div_animation_effect7 {
-            0%   { transform: translate(${animationTestNumberP}vw, ${animationTestNumberN}vh);}
-            50%  { transform: translate(${animationTestNumberN}vw, ${animationTestNumberP}vh);}
-            100% { transform: translate(0px, 0vh);}
-            // 0%   { transform: scale(1, 0.01); transform: rotate(0turn);}
-            // 100% { transform: scale(1, 1); transform: rotate(1turn);}
-          }
-
-          `}</style>
-    </div>
+function Icon({ name }) {
+  return (
+    <svg className="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d={ICON_PATHS[name]} />
+    </svg>
   );
 }
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import "./../App.css";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import ContactList from "./ContactList";
 import Settings from "./Settings";
 import Footer from "./Footer";
@@ -26,11 +26,18 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="OAuth">
-          <OAuth />
-        </div>
+        <header className="appHeader">
+          <Link to="/" className="appBrand">
+            <img
+              src="/PrioritactsSample_ByTailorBrands.png"
+              alt=""
+              className="appBrandLogo"
+            />
+            <span>Prioritacts</span>
+          </Link>
+        </header>
 
-        <div className="appBody">
+        <main className="appBody">
           <Switch>
             <Route
               exact
@@ -42,37 +49,15 @@ class App extends React.Component {
             <Route path="/settings" render={() => <Settings />} />
             <Route path="/privacy" render={() => <Privacy />} />
           </Switch>
+        </main>
+
+        <div className="OAuth">
+          <OAuth />
         </div>
 
-        <div className="appFooter">
+        <nav className="appFooter">
           <Footer />
-        </div>
-
-        <style>{`
-          .OAuth {
-            position: fixed;
-            bottom: 0px;
-            z-index: 99;
-            width: 100%;
-            background-color: red;
-          }
-
-          .appBody {
-            position: fixed;
-            overflow: auto;
-            top: 0px;
-            height: 93%;
-            width: 100%;
-          }
-
-          .appFooter {
-            position: fixed;
-            overflow: hidden;
-            bottom: 0px;
-            width: 100%;
-            height: 50px;
-          }
-        `}</style>
+        </nav>
       </div>
     );
   }

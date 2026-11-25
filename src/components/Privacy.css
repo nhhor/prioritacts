@@ -1,0 +1,35 @@
+.PrivacyText {
+  max-width: 68ch;
+  margin: 0 auto;
+  padding: 8px 20px 24px;
+  text-align: left;
+  color: var(--text-muted);
+  line-height: 1.7;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.PrivacyText .pageTitle {
+  margin: 16px 0;
+  color: var(--text);
+}
+
+.PrivacyText h2 {
+  margin: 28px 0 8px;
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+.PrivacyText ul {
+  padding-left: 1.25rem;
+}
+.PrivacyText li {
+  margin: 4px 0;
+}
+
+.PrivacyText hr {
+  margin-top: 24px;
+  border: none;
+  border-top: 1px solid var(--border);
+}

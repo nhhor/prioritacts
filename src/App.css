@@ -1,9 +1,67 @@
-html {
-  background: rgba(179,179,179,.1);
+.App {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-.App {
-  text-align: center;
-  overflow: hidden;
-  background-color: #ff0000;
+/* ---------- Header ---------- */
+.appHeader {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.appBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+.appBrand:hover {
+  text-decoration: none;
+}
+
+.appBrandLogo {
+  width: 32px;
+  height: 32px;
+  padding: 2px 3px 6px;
+  border-radius: 9px;
+  background: #ffffff;
+  object-fit: cover;
+  object-position: center top;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Body ---------- */
+.appBody {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 16px 16px calc(var(--nav-h) + 96px);
+}
+
+/* ---------- Bottom nav ---------- */
+.appFooter {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-top: 1px solid var(--border);
 }

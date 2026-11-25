@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Settings.css";
 
 function Settings(props) {
   function signOut() {
@@ -10,40 +11,18 @@ function Settings(props) {
 
   return (
     <div className="inSettings">
-      <ul>
-        <li>
-          <h1>
-            <a href="/" onClick={signOut}>
-              Sign Out
-            </a>
-          </h1>
-        </li>
-        <li>
-          <h2>
-            <Link to="/privacy">Privacy Policy</Link>
-          </h2>
-        </li>
-      </ul>
-
-      <style>{`
-          .inSettings {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-
-            background-color: rgba(179, 179, 179, .66);
-            padding: 10%;
-            margin: 0;
-            border-radius: 10px;
-            box-shadow: 2px 2px 2px black;
-          }
-
-          .inSettings h1 {
-            // margin: 0px;
-            text-align: left;
-          }
-          `}</style>
+      <h1 className="pageTitle">Settings</h1>
+      <div className="settingsCard">
+        <Link to="/privacy" className="settingsItem">
+          <span>Privacy Policy</span>
+          <span className="settingsChevron" aria-hidden="true">
+            ›
+          </span>
+        </Link>
+        <a href="/" onClick={signOut} className="settingsItem isDanger">
+          <span>Sign Out</span>
+        </a>
+      </div>
     </div>
   );
 }

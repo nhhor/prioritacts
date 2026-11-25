@@ -1,9 +1,11 @@
 import React from 'react';
+import './Privacy.css';
 // import { Link } from 'react-router-dom';
 
 function Privacy() {
   return (
     <div className="PrivacyText">
+          <h1 className="pageTitle">Privacy Policy</h1>
 
           <p>
             {'At Prioritacts, accessible from '}
@@ -232,17 +234,6 @@ function Privacy() {
 
           <hr />
 
-          <style>
-            {
-              `
-              .PrivacyText {
-                text-align: left;
-                overflow: auto;
-                padding: 0px 50px;
-              }
-              `
-            }
-          </style>
         </div>
   );
 }
