@@ -132,7 +132,8 @@ code {
 /* ---------- Form controls ---------- */
 input[type="text"],
 input[type="number"],
-input[type="search"] {
+input[type="search"],
+select {
   font: inherit;
   color: var(--text);
   background: var(--surface);
@@ -144,7 +145,8 @@ input[type="search"] {
 input::placeholder {
   color: var(--text-subtle);
 }
-input:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-ring);

@@ -7,7 +7,9 @@
   box-shadow: var(--shadow-sm);
   text-align: left;
   animation: contactIn 0.4s var(--ease) both;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 .contactSection:hover {
   box-shadow: var(--shadow);
@@ -49,11 +51,15 @@
   border-radius: 50%;
   object-fit: cover;
   background: var(--surface-2);
-  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--border);
+  box-shadow:
+    0 0 0 2px var(--surface),
+    0 0 0 3px var(--border);
   transition: box-shadow 0.15s;
 }
 .contactAvatar:hover .contactPhoto {
-  box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--accent);
+  box-shadow:
+    0 0 0 2px var(--surface),
+    0 0 0 3px var(--accent);
 }
 
 .contactInfo {
@@ -119,10 +125,56 @@
   display: flex;
   gap: 8px;
 }
-.settingsForm input {
+.settingsForm select {
   flex: 1;
   min-width: 0;
   max-width: 220px;
+}
+
+/* Custom dropdown: native arrow replaced by a theme-aware chevron */
+.prioritySelect {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 36px;
+  font-variant-numeric: tabular-nums;
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 19px) 50%,
+    calc(100% - 14px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background-color 0.15s;
+}
+.prioritySelect:hover {
+  border-color: var(--text-subtle);
+  background-color: var(--surface-2);
+}
+.prioritySelect:focus {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+    linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+}
+/* Prompt shown in muted color until a value is picked */
+.prioritySelect:invalid {
+  color: var(--text-subtle);
+}
+.prioritySelect option {
+  color: var(--text);
+  background-color: var(--surface);
+  font-weight: 400;
+}
+.prioritySelect option:disabled {
+  color: var(--text-subtle);
+}
+.prioritySelect .priorityOption--emphasis {
+  font-weight: 900;
 }
 
 /* ---------- Actions ---------- */
@@ -148,7 +200,10 @@
   color: var(--tone);
   font-size: 0.7rem;
   font-weight: 600;
-  transition: transform 0.1s, filter 0.15s, background-color 0.15s;
+  transition:
+    transform 0.1s,
+    filter 0.15s,
+    background-color 0.15s;
 }
 .actionBtn .icon {
   width: 18px;

@@ -195,6 +195,7 @@ function Contact(props) {
     todayLocal.getMonth() + 1,
   ).padStart(2, "0")}-${String(todayLocal.getDate()).padStart(2, "0")}`;
 
+  const PRIORITY_OPTIONS = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
   let _priorityForm = null;
   function handleFormUpdate(event) {
     event.preventDefault();
@@ -234,7 +235,7 @@ function Contact(props) {
     dispatch(fetchNewVisit(id, etag, userDefinedUpdate, props.token));
 
     handleFormClick("settingsFormID_" + _priorityForm.id);
-    _priorityForm.value = null;
+    _priorityForm.value = "";
   }
 
   let handleFormClick = (arg) => {
@@ -385,18 +386,32 @@ function Contact(props) {
 
       <div className="settingsForm" id={"settingsFormID_" + props.id}>
         <form onSubmit={handleFormUpdate}>
-          <input
-            type="number"
+          <select
+            className="prioritySelect"
             id={props.id}
             etag={props.etag}
             userdefined={props.userDefined}
             name="priorityForm"
-            placeholder="Desired frequency"
             aria-label="Desired frequency"
+            defaultValue=""
+            required
             ref={(input) => {
               _priorityForm = input;
             }}
-          />
+          >
+            <option value="" disabled>
+              Desired frequency
+            </option>
+            {PRIORITY_OPTIONS.map((n) => (
+              <option
+                key={n}
+                value={n}
+                className={n === 55 ? "priorityOption--emphasis" : undefined}
+              >
+                {n}
+              </option>
+            ))}
+          </select>
           <button type="submit" className="btn btn-primary">
             Update
           </button>
