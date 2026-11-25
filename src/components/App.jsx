@@ -51,9 +51,16 @@ class App extends React.Component {
           </Switch>
         </main>
 
-        <div className="OAuth">
-          <OAuth />
-        </div>
+        <Route
+          render={({ location }) => (
+            <div
+              className="OAuth"
+              hidden={location.pathname.startsWith("/privacy")}
+            >
+              <OAuth />
+            </div>
+          )}
+        />
 
         <nav className="appFooter">
           <Footer />

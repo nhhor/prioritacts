@@ -33,3 +33,74 @@
   border: none;
   border-top: 1px solid var(--border);
 }
+
+.PrivacyText code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.privacyUpdated {
+  margin: -8px 0 16px;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
+
+.privacySummary {
+  padding: 4px 18px 10px;
+  border: 1px solid var(--accent-ring);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+.privacySummary h2 {
+  margin-top: 14px;
+  color: var(--accent);
+}
+.privacySummary strong {
+  color: var(--text);
+}
+
+.privacyFlow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  text-align: center;
+}
+.privacyFlowNode {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+.privacyFlowLabel {
+  font-weight: 600;
+  color: var(--text);
+}
+.privacyFlowSub {
+  font-size: 0.78rem;
+  color: var(--text-subtle);
+}
+.privacyFlowArrow {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--accent);
+}
+.privacyFlow figcaption {
+  flex-basis: 100%;
+  font-size: 0.85rem;
+}

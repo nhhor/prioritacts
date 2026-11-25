@@ -1,240 +1,230 @@
-import React from 'react';
-import './Privacy.css';
-// import { Link } from 'react-router-dom';
+import React from "react";
+import "./Privacy.css";
+
+const LAST_UPDATED = "November 25, 2026";
 
 function Privacy() {
   return (
     <div className="PrivacyText">
-          <h1 className="pageTitle">Privacy Policy</h1>
+      <h1 className="pageTitle">Privacy Policy</h1>
+      <p className="privacyUpdated">Last updated {LAST_UPDATED}</p>
 
-          <p>
-            {'At Prioritacts, accessible from '}
-            <a href="https://prioritacts.netlify.app/">https://prioritacts.netlify.app/</a>
-            {`, one of my main priorities is the privacy of my visitors. This Privacy
-              Policy document contains types of information that is collected and recorded
-              by Prioritacts and how I use it.`}
-          </p>
+      <section className="privacySummary" aria-labelledby="privacy-tldr">
+        <h2 id="privacy-tldr">The short version</h2>
+        <ul>
+          <li>
+            <strong>Your contacts never touch my servers.</strong> I don&apos;t
+            have any. Prioritacts runs entirely in your browser and talks
+            directly to your own Google account.
+          </li>
+          <li>
+            <strong>No one in the middle.</strong> There is no Prioritacts
+            database, no backend, and no third party that receives, stores, or
+            can see your contact data.
+          </li>
+          <li>
+            <strong>No ads, no analytics, no tracking.</strong> Nothing is sold,
+            shared, or profiled.
+          </li>
+          <li>
+            <strong>You&apos;re in control.</strong> Sign out to wipe everything
+            from this device, and revoke access from your Google Account at any
+            time.
+          </li>
+        </ul>
+      </section>
 
-          <p>
-            {`If you have additional questions or require more information about my
-              Privacy Policy, do not hesitate to contact us.`}
-          </p>
+      <h2>How Prioritacts works</h2>
+      <p>
+        Prioritacts is a static web page. When you open it, your browser
+        downloads the app&apos;s code once, and from then on the app runs on{" "}
+        <em>your</em> device. When you sign in, Google gives your browser a
+        temporary access token, and your browser uses that token to talk
+        directly to the Google People (Contacts) API.
+      </p>
 
-          <p>
-            {`This Privacy Policy applies only to these online activities and is valid
-              for visitors to my website with regards to the information that they
-              shared and/or collect in Prioritacts. This policy is not applicable to any
-              information collected offline or via channels other than this website.`}
-          </p>
-
-          <h2>Consent</h2>
-
-          <p>
-            {`By using my website, you hereby consent to my Privacy Policy and agree
-              to its terms.`}
-          </p>
-
-          <h2>Information I may collect</h2>
-
-          <p>
-            {`The personal information that you are asked to provide, and the reasons
-                why you are asked to provide it, will be made clear to you at the point
-                I ask you to provide your personal information.`}
-          </p>
-
-          <ul>
-            <li>{`From Google, I may View your Email Address.`}</li>
-            <li>{`From Google, I may See your personal info, including any personal info
-                you've made publicly available.`}
-            </li>
-            <ul>
-              <li>{`Specifically: The name you use in association with that e-mail account.`}
-              </li>
-            </ul>
-            <li>{`From Google, I may Associate you with your personal info on Google.`}</li>
-            <li>{`With Google People (Contacts), I may pass-through (load and make accessible to you) the Profile picture, name, e-mail address, special dates, phone number(s), and specific user-defined contact fields that set and update a '~prioritacts~frequency~' and a '~prioritacts~lastContact~' fields.`}
-            </li>
-          </ul>
-
-          <p>{`If you contact me directly, I may receive additional information about
-              you such as your name, email address, phone number, the contents of the
-              message and/or attachments you may send us, and any other information
-              you may choose to provide.`}
-          </p>
-
-          <h2>How I may use your information</h2>
-
-          <p>
-            I may use the information we collect in various ways, including to:
-          </p>
-
-          <ul>
-            <li>Provide, operate, and maintain my webste</li>
-            <li>Improve, personalize, and expand my webste</li>
-            <li>Understand and analyze how you use my webste</li>
-            <li>Develop new products, services, features, and functionality</li>
-            <li>{`Communicate with you, either directly or through one of my partners,
-              including for customer service, to provide you with updates and other
-              information relating to the webste, and for marketing and promotional purposes.`}
-            </li>
-            <li>Send you emails</li>
-            <li>Find and prevent fraud</li>
-          </ul>
-
-          <h2>What information do we share:</h2>
-          <ul>
-            <li>Your information is not stored or shared by us except as explained herein or as required by law.</li>
-          </ul>
-
-
-          <h2>Log Files</h2>
-
-          <p>
-            {`Prioritacts follows a standard procedure of using log files. These files
-              log visitors when they visit websites. All hosting companies do this and
-              a part of hosting services' analytics. The information collected by log
-              files include internet protocol (IP) addresses, browser type, Internet
-              Service Provider (ISP), date and time stamp, referring/exit pages, and
-              possibly the number of clicks. These are not linked to any information
-              that is personally identifiable. The purpose of the information is for
-              analyzing trends, administering the site, tracking users' movement on
-              the website, and gathering demographic information. Our Privacy Policy
-              was created with the help of the `}
-            <a href="https://www.privacypolicygenerator.info">Privacy Policy Generator </a>
-            and the
-            <a href="https://www.disclaimergenerator.org/"> Disclaimer Generator</a>
-            .
-          </p>
-
-          <h2>Cookies and Web Beacons</h2>
-
-          <p>{`Like any other website, Prioritacts uses 'cookies'. These cookies are used
-            to store information including visitors' preferences, and the pages on the
-            website that the visitor accessed or visited. The information is used to
-            optimize the users' experience by customizing our web page content based
-            on visitors' browser type and/or other information.`}
-          </p>
-
-          <p>
-            For more general information on cookies, please read
-            <a href="https://www.cookieconsent.com/what-are-cookies/"> &quot;What Are Cookies&quot;</a>.
-          </p>
-
-
-          <h2>Advertising Partners Privacy Policies</h2>
-
-          <p>
-            {`You may consult this list to find the Privacy Policy for each of the advertising
-              partners of Prioritacts.`}
-          </p>
-
-          <p>
-            {`Third-party ad servers or ad networks uses technologies like cookies,
-              JavaScript, or Web Beacons that are used in their respective advertisements
-              and links that may appear on Prioritacts, which are sent directly to a users'
-              browser. They automatically receive your IP address when this occurs.
-              These technologies are used to measure the effectiveness of their advertising
-              campaigns and/or to personalize the advertising content that you see on
-              websites that you visit.`}
-          </p>
-
-          <p>
-            {`Note that Prioritacts has no access to or control over these cookies that
-              are used by third-party advertisers.`}
-          </p>
-
-          <h2>Third Party Privacy Policies</h2>
-
-          <p>
-            {`Prioritacts's Privacy Policy does not apply to other advertisers or websites.
-              Thus, I might reccommend you to consult the respective Privacy Policies of
-              these third-party ad servers for more detailed information. It may include
-              their practices and instructions about how to opt-out of certain options.`}
-          </p>
-
-          <p>
-            {`You can choose to disable cookies through your individual browser options.
-              To know more detailed information about cookie management with specific
-              web browsers, it can be found at the browsers' respective websites.`}
-          </p>
-
-          <h2>CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
-
-          <p>Under the CCPA, among other rights, California consumers have the right to:</p>
-          <p>
-            {`Request that a business that collects a consumer's personal data disclose
-              the categories and specific pieces of personal data that a business has
-              collected about consumers.`}
-          </p>
-          <p>
-            {`Request that a business delete any personal data about the consumer that
-              a business has collected.`}
-          </p>
-          <p>
-            {`Request that a business that sells a consumer's personal data, not
-              sell the consumer's personal data.`}
-          </p>
-          <p>{`If you make a request, I have one month to respond to you. If you would
-              like to exercise any of these rights, please contact me.`}
-          </p>
-
-          <h2>GDPR Data Protection Rights</h2>
-
-          <p>
-            {`I would like to make sure you are fully aware of all of your data protection
-              rights. Every user is entitled to the following:`}
-          </p>
-          <p>
-            {`The right to access – You have the right to request copies of your personal
-              data. I may charge you a small fee for this service.`}
-          </p>
-          <p>
-            {`The right to rectification – You have the right to request that I correct
-              any information you believe is inaccurate. You also have the right to
-              request that I complete the information you believe is incomplete.`}
-          </p>
-          <p>
-            {`The right to erasure – You have the right to request that I erase your
-              personal data, under certain conditions.`}
-          </p>
-          <p>
-            {`The right to restrict processing – You have the right to request that
-              I restrict the processing of your personal data, under certain conditions.`}
-          </p>
-          <p>
-            {`The right to object to processing – You have the right to object to my
-              processing of your personal data, under certain conditions.`}
-          </p>
-          <p>
-            {`The right to data portability – You have the right to request that I
-              transfer the data that I have collected to another organization, or
-              directly to you, under certain conditions.`}
-          </p>
-          <p>
-            {`If you would like to exercise any of these rights, please contact me.`}
-          </p>
-
-          <h2>Children's Information</h2>
-
-          <p>
-            {`Another part of my priority is adding protection for children while using
-              the internet. I encourage parents and guardians to observe, participate
-              in, and/or monitor and guide their online activity.`}
-          </p>
-
-          <p>
-            {`Prioritacts does not knowingly collect any Personal Identifiable Information
-              from children under the age of 13. If you think that your child provided
-              this kind of information on my website, I strongly encourage you to
-              contact me immediately and I will do my best efforts to promptly remove
-              such information from my records.`}
-          </p>
-
-          Noah Horwitz can be reached about this project via e-mail, <a href="mailto:prioritacts@gmail.com">here</a>.
-
-          <hr />
-
+      <figure className="privacyFlow" aria-label="Data flow diagram">
+        <div className="privacyFlowNode">
+          <span className="privacyFlowLabel">Your browser</span>
+          <span className="privacyFlowSub">Prioritacts runs here</span>
         </div>
+        <div className="privacyFlowArrow" aria-hidden="true">
+          <span>⟷</span>
+          <span className="privacyFlowSub">direct, encrypted (HTTPS)</span>
+        </div>
+        <div className="privacyFlowNode">
+          <span className="privacyFlowLabel">Your Google account</span>
+          <span className="privacyFlowSub">Your contacts live here</span>
+        </div>
+        <figcaption>
+          That&apos;s the whole picture. There is no Prioritacts server in
+          between.
+        </figcaption>
+      </figure>
+
+      <p>
+        This means I, the developer, have no way to see your contacts, your
+        notes, or your activity in the app, even if I wanted to.
+      </p>
+
+      <h2>What the app accesses in your Google account</h2>
+      <p>
+        When you sign in, Google asks you to grant Prioritacts access to your
+        contacts. With that permission, the app <strong>reads</strong> the
+        following contact fields, only to display them to you:
+      </p>
+      <ul>
+        <li>Names and profile photos</li>
+        <li>Email addresses and phone numbers</li>
+        <li>Birthdays and other special dates</li>
+        <li>Custom (user-defined) contact fields</li>
+      </ul>
+      <p>
+        The only thing the app ever <strong>writes</strong> back to your Google
+        account is two custom fields on a contact, when you set them:
+      </p>
+      <ul>
+        <li>
+          <code>~prioritacts~frequency~</code>: how often you want to be in
+          touch
+        </li>
+        <li>
+          <code>~prioritacts~lastContact~</code>: when you last reached out
+        </li>
+      </ul>
+      <p>
+        These are saved inside your own Google Contacts, so your settings follow
+        you across devices without Prioritacts storing anything itself. The app
+        never deletes contacts or changes any other contact information.
+      </p>
+
+      <h2>What is stored on your device</h2>
+      <p>
+        To keep you signed in and make the app load quickly, your browser&apos;s
+        local storage holds:
+      </p>
+      <ul>
+        <li>The temporary Google access token</li>
+        <li>A sync token, so the app only fetches contacts that changed</li>
+        <li>A cached copy of your contact list</li>
+        <li>Cached copies of contacts' profile photos</li>
+      </ul>
+      <p>
+        This data stays on your device and is never sent anywhere except to
+        Google. Choosing <strong>Sign Out</strong> in Settings deletes all of
+        it.
+      </p>
+
+      <h2>What I don&apos;t do</h2>
+      <ul>
+        <li>No Prioritacts servers or databases hold your data</li>
+        <li>No advertising and no ad networks</li>
+        <li>No analytics, tracking pixels, or tracking cookies</li>
+        <li>
+          No selling, renting, or sharing of personal information. There is
+          nothing to share.
+        </li>
+      </ul>
+
+      <h2>Services involved</h2>
+      <p>
+        I&apos;m being upfront here, because a privacy-focused app should be:
+      </p>
+      <ul>
+        <li>
+          <strong>Google</strong> handles sign-in and stores your contacts, as
+          it already does. Your use of your Google account is covered by{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google&apos;s Privacy Policy
+          </a>
+          .
+        </li>
+        <li>
+          <strong>Netlify</strong> hosts the app&apos;s static files. Like any
+          web host, it may keep standard server logs (such as IP address,
+          browser type, and time of request) when the page is loaded. Netlify
+          never receives your Google data or your contacts, because those go
+          directly between your browser and Google.
+        </li>
+      </ul>
+
+      <h2>Your control and your rights</h2>
+      <p>
+        Prioritacts doesn&apos;t collect or keep personal data on any server, so
+        there is nothing for me to hand over, correct, or delete on your behalf.
+        You can do all of it yourself:
+      </p>
+      <ul>
+        <li>
+          <strong>Clear this device:</strong> choose Sign Out in Settings.
+        </li>
+        <li>
+          <strong>Revoke access:</strong> remove Prioritacts in your{" "}
+          <a
+            href="https://myaccount.google.com/connections"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Account&apos;s third-party connections
+          </a>
+          .
+        </li>
+        <li>
+          <strong>Remove app fields:</strong> delete the{" "}
+          <code>~prioritacts~</code> custom fields from any contact in Google
+          Contacts.
+        </li>
+      </ul>
+      <p>
+        These steps cover your rights under laws such as the GDPR and CCPA. If
+        you have any questions about them, please get in touch.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        Prioritacts isn&apos;t directed at children under 13 and doesn&apos;t
+        knowingly collect information from anyone, including children.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        If how Prioritacts handles data ever changes, I&apos;ll update this page
+        and the date at the top. Any change that weakens these privacy promises
+        will be stated clearly here before it takes effect.
+        <ul>
+          <li>
+            <strong>View changes to the actual Privacy Policy's code: </strong>
+            <a href="https://github.com/nhhor/prioritacts/commits/master/src/components/Privacy.jsx">
+              here
+            </a>
+            .
+          </li>
+        </ul>
+      </p>
+      <h2>Review the app's code</h2>
+      <p>
+        Every line of Prioritacts&apos; code is available for review on my{" "}
+        <strong>GitHub repository </strong>
+        <a href="https://github.com/nhhor/prioritacts">here</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions or concerns? Noah Horwitz can be reached about this project at{" "}
+        <a
+          href="https://github.com/nhhor/prioritacts/issues"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://github.com/nhhor/prioritacts/issues
+        </a>
+        .
+      </p>
+    </div>
   );
 }
 
