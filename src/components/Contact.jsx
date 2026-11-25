@@ -131,8 +131,13 @@ function Contact(props) {
     userDefined,
     interactionType,
     redirect,
+    interactionDate,
   ) => {
-    let today = new Date();
+    // Only "visit" may supply a custom date; all other types always use today.
+    let today =
+      interactionType === "visit" && interactionDate instanceof Date
+        ? interactionDate
+        : new Date();
     let userDefinedUpdate = [];
     if (
       userDefined == [] ||
@@ -167,6 +172,44 @@ function Contact(props) {
       window.open(redirect, "_blank");
     }
   };
+
+  const visitDateInput = React.useRef(null);
+
+  let handleVisitClick = () => {
+    const input = visitDateInput.current;
+    if (!input) return;
+    input.value = "";
+    if (typeof input.showPicker === "function") {
+      try {
+        input.showPicker();
+        return;
+      } catch (err) {
+        // Fall through to focus/click for browsers that refuse showPicker.
+      }
+    }
+    input.focus();
+    input.click();
+  };
+
+  let handleVisitDateChange = (event) => {
+    const value = event.target.value; // "YYYY-MM-DD"
+    if (!value) return;
+    const [year, month, day] = value.split("-").map(Number);
+    handleInteractionClick(
+      props.id,
+      props.etag,
+      props.userDefined,
+      "visit",
+      "visit",
+      new Date(year, month - 1, day),
+    );
+    event.target.value = "";
+  };
+
+  const todayLocal = new Date();
+  const todayInputValue = `${todayLocal.getFullYear()}-${String(
+    todayLocal.getMonth() + 1,
+  ).padStart(2, "0")}-${String(todayLocal.getDate()).padStart(2, "0")}`;
 
   let _priorityForm = null;
   function handleFormUpdate(event) {
@@ -324,21 +367,20 @@ function Contact(props) {
                   Call
                 </button>
               </span>
-              <span className="contactMethod">
-                <button
-                  className="buttonVisit"
-                  onClick={() => {
-                    handleInteractionClick(
-                      props.id,
-                      props.etag,
-                      props.userDefined,
-                      "visit",
-                      "visit",
-                    );
-                  }}
-                >
+              <span className="contactMethod visitMethod">
+                <button className="buttonVisit" onClick={handleVisitClick}>
                   Visit
                 </button>
+                <input
+                  type="date"
+                  className="visitDateInput"
+                  aria-label="Visit date"
+                  tabIndex={-1}
+                  max={todayInputValue}
+                  defaultValue=""
+                  ref={visitDateInput}
+                  onChange={handleVisitDateChange}
+                />
               </span>
             </div>
           </div>
@@ -438,6 +480,21 @@ function Contact(props) {
             font-weight: bolder;
             min-width: 50px;
             cursor: pointer;
+          }
+
+          .visitMethod {
+            position: relative;
+          }
+          .visitDateInput {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            padding: 0;
+            border: 0;
+            opacity: 0;
+            pointer-events: none;
           }
 
           .priorityDiv {
