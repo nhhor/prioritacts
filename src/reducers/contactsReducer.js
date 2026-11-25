@@ -72,6 +72,30 @@ export default (state = initialState.contacts, action) => {
 
       return [...action.payload].sort(sortAlphaNum);
     }
+    case types.MERGE_CONTACTS: {
+      const currentContacts = Array.isArray(state) ? state : [];
+      if (!Array.isArray(action.payload)) {
+        return currentContacts;
+      }
+
+      const byResourceName = new Map(
+        currentContacts.map((contact) => [contact.resourceName, contact]),
+      );
+
+      action.payload.forEach((changedContact) => {
+        if (!changedContact || !changedContact.resourceName) {
+          return;
+        }
+
+        if (changedContact.metadata && changedContact.metadata.deleted) {
+          byResourceName.delete(changedContact.resourceName);
+        } else {
+          byResourceName.set(changedContact.resourceName, changedContact);
+        }
+      });
+
+      return [...byResourceName.values()].sort(sortAlphaNum);
+    }
     case types.LOG_EVENT: {
       const currentContacts = Array.isArray(state) ? state : [];
       if (!action || !action.payload || !action.payload.resourceName) {

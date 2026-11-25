@@ -47,3 +47,29 @@ test("keeps the existing contacts array when LOG_EVENT receives a payload withou
 
   assert.deepEqual(nextState, existingContacts);
 });
+
+test("MERGE_CONTACTS updates changed contacts, adds new ones, and removes deleted ones without dropping the rest", () => {
+  const existingContacts = [
+    { resourceName: "people/c1", etag: "a1", names: [{ displayName: "Alice" }] },
+    { resourceName: "people/c2", etag: "b1", names: [{ displayName: "Bob" }] },
+    { resourceName: "people/c3", etag: "c1", names: [{ displayName: "Carol" }] },
+  ];
+
+  const nextState = contactsReducer(existingContacts, {
+    type: types.MERGE_CONTACTS,
+    payload: [
+      { resourceName: "people/c2", etag: "b2", names: [{ displayName: "Bob" }] },
+      { resourceName: "people/c3", metadata: { deleted: true } },
+      { resourceName: "people/c4", etag: "d1", names: [{ displayName: "Dave" }] },
+    ],
+  });
+
+  assert.deepEqual(
+    nextState.map((c) => [c.resourceName, c.etag]),
+    [
+      ["people/c1", "a1"],
+      ["people/c2", "b2"],
+      ["people/c4", "d1"],
+    ],
+  );
+});

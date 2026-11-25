@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadContacts, setToken } from "./../actions";
+import { loadContacts, mergeContacts, setToken } from "./../actions";
 import "./OAuth.css";
 
 const CLIENT_ID = import.meta.env.REACT_APP_CLIENT_ID;
@@ -117,7 +117,14 @@ class OAuth extends Component {
     const { dispatch } = this.props;
 
     try {
-      const syncToken = window.localStorage.getItem(PEOPLE_SYNC_TOKEN_KEY);
+      // A sync token only makes sense when we already hold the full contact
+      // list; otherwise the delta it returns would be all we have.
+      const hasSavedContacts =
+        Array.isArray(this.props.contactsReducer) &&
+        this.props.contactsReducer.length > 0;
+      const syncToken = hasSavedContacts
+        ? window.localStorage.getItem(PEOPLE_SYNC_TOKEN_KEY)
+        : null;
       const params = new URLSearchParams({
         personFields:
           "birthdays,emailAddresses,events,metadata,names,phoneNumbers,photos,userDefined",
@@ -193,11 +200,14 @@ class OAuth extends Component {
         window.localStorage.setItem(PEOPLE_SYNC_TOKEN_KEY, json.nextSyncToken);
       }
 
-      window.localStorage.setItem(
-        "prioritacts_contacts",
-        JSON.stringify(items),
-      );
-      dispatch(loadContacts(items));
+      // With a sync token, Google returns only contacts changed since the last
+      // sync, so merge them in. Without one, it's the full list: replace.
+      // (The store subscription in index.jsx persists the result.)
+      if (syncToken) {
+        dispatch(mergeContacts(items));
+      } else {
+        dispatch(loadContacts(items));
+      }
       dispatch(setToken(token));
       window.localStorage.setItem(GOOGLE_ACCESS_TOKEN_KEY, token);
       this.setState({

@@ -5,6 +5,13 @@ export const loadContacts = (items) => ({
   payload: items,
 });
 
+// Merge an incremental People API sync delta (changed/deleted contacts only)
+// into the existing contact list instead of replacing it.
+export const mergeContacts = (items) => ({
+  type: types.MERGE_CONTACTS,
+  payload: items,
+});
+
 export const setToken = (token) => ({
   type: types.SET_TOKEN,
   payload: token,
